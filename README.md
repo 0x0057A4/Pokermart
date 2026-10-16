@@ -46,3 +46,11 @@ Unter „Möbel & Ausbau“ wird die nächste Stufe gekauft. Möbel, Ware und Fo
 Spielstände der ersten Version behalten ihren bisherigen größeren Laden. Für den neuen Kioskstart unter „Management → Neues Spiel“ beginnen; bei Bedarf vorher exportieren.
 
 Zusätzlich geprüft: Startkapital, Kioskfläche, sämtliche Ausbaustufen, Geldabzug, Ablehnung bei zu wenig Geld, Erreichbarkeit der Warenmöbel und Lager in jeder Stufe sowie Migration alter Spielstände.
+
+## Bewegungs- und Aktionsanimationen
+
+Figuren verwenden Vorder-, Rück- und Seitenansichten aus dem bereitgestellten Sprite-Asset. Vier Gehphasen bewegen Arme und Beine getrennt; Schrittzyklus, Körperbewegung, Schatten und dezente Schrittpartikel folgen der tatsächlich zurückgelegten Strecke. Im Stillstand endet die Schrittbewegung. Auch Kunden wechseln ihre Blickrichtung entlang ihrer Laufwege.
+
+Kassieren, Einräumen, Lieferannahme, Reinigen, Pfandservice und Ansprechen von Dieben besitzen eigene zeitlich begrenzte Aktionsposen mit Karton-, Besen- oder Geldbewegungen. Kunden zeigen das Einpacken, Mitarbeitende die zugehörigen Arbeitsposen. Aktionen blockieren die Spielfigur kurz, bis die Bewegung abgeschlossen ist. Pausen und offene Menüs halten die Animationszeit an. Der Animationszustand ist vom Spielstand getrennt; vorhandene Spielstände bleiben nutzbar.
+
+Geprüft: Richtungswechsel, Schrittfortschritt, Stillstand, Aktionssperre, Ablauf der Aktionsdauer, Pause und Speicherkompatibilität; Canvas-Darstellung der vier Richtungen, Gehphasen und Spielwelt visuell geprüft. Vollständige Browserprüfung weiterhin nicht verfügbar.
