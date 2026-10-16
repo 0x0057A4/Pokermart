@@ -54,3 +54,11 @@ Figuren verwenden Vorder-, Rück- und Seitenansichten aus dem bereitgestellten S
 Kassieren, Einräumen, Lieferannahme, Reinigen, Pfandservice und Ansprechen von Dieben besitzen eigene zeitlich begrenzte Aktionsposen mit Karton-, Besen- oder Geldbewegungen. Kunden zeigen das Einpacken, Mitarbeitende die zugehörigen Arbeitsposen. Aktionen blockieren die Spielfigur kurz, bis die Bewegung abgeschlossen ist. Pausen und offene Menüs halten die Animationszeit an. Der Animationszustand ist vom Spielstand getrennt; vorhandene Spielstände bleiben nutzbar.
 
 Geprüft: Richtungswechsel, Schrittfortschritt, Stillstand, Aktionssperre, Ablauf der Aktionsdauer, Pause und Speicherkompatibilität; Canvas-Darstellung der vier Richtungen, Gehphasen und Spielwelt visuell geprüft. Vollständige Browserprüfung weiterhin nicht verfügbar.
+
+## Möbel verschieben
+
+Über „Möbel verschieben“, Taste M, das Baumenü oder die Möbelansicht lässt sich der Verschiebemodus öffnen. Erst das vorhandene Möbel anklicken, dann den neuen Zielplatz. Regale, Kühlschränke, Gefriertruhen, Kassen, SB-Kassen, Pfandautomaten, Pflanzen und Abfallbehälter können kostenlos umgestellt werden. Produktzuordnung und Warenbestand bleiben erhalten.
+
+Während des Verschiebens pausiert die Simulation. Das Originalmöbel bleibt bis zur gültigen Platzierung stehen; eine Vorschau zeigt den Zielplatz in Grün oder Rot. Escape oder „Verschieben beenden“ bricht ohne Änderung ab. Bauen ist auf gekaufte Verkaufsfläche begrenzt. Belegte Felder, Figurenpositionen sowie versperrte Zugänge zu Möbeln, Lager oder Ausgang werden abgewiesen. Kunden erhalten nach dem Umstellen neue Wege zu ihren bisherigen Zielen. Spielstandformat unverändert.
+
+Geprüft: kostenloses Verschieben bei leerer Kasse, Erhalt von Objektidentität und Ware, Umstellen einer Kasse, ungültige Zielplätze, Abbruch, Pause/Fortsetzen, Ausgangswege für Kunden und Spielfigur sowie Verkaufsablauf und Speicherstand nach der Änderung.
