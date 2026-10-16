@@ -62,3 +62,13 @@ Geprüft: Richtungswechsel, Schrittfortschritt, Stillstand, Aktionssperre, Ablau
 Während des Verschiebens pausiert die Simulation. Das Originalmöbel bleibt bis zur gültigen Platzierung stehen; eine Vorschau zeigt den Zielplatz in Grün oder Rot. Escape oder „Verschieben beenden“ bricht ohne Änderung ab. Bauen ist auf gekaufte Verkaufsfläche begrenzt. Belegte Felder, Figurenpositionen sowie versperrte Zugänge zu Möbeln, Lager oder Ausgang werden abgewiesen. Kunden erhalten nach dem Umstellen neue Wege zu ihren bisherigen Zielen. Spielstandformat unverändert.
 
 Geprüft: kostenloses Verschieben bei leerer Kasse, Erhalt von Objektidentität und Ware, Umstellen einer Kasse, ungültige Zielplätze, Abbruch, Pause/Fortsetzen, Ausgangswege für Kunden und Spielfigur sowie Verkaufsablauf und Speicherstand nach der Änderung.
+
+## Sichtbare Wände und Möbel an der Rückwand
+
+Shop und Lager besitzen hohe Rückwände mit Mauerkrone, heller Innenfläche und Sockelleiste. Die Seitenwände und die niedrige Vorderwand zeigen die Raumgrenzen, ohne das Spielgeschehen zu verdecken. Der Eingang und der Lagerdurchgang bleiben sichtbar offen. Spielfigur und Kunden benutzen diese Durchgänge; geschlossene Wandabschnitte sind nicht passierbar.
+
+Die beiden Startregale und die Getränkekühlung stehen direkt in der hintersten Bodenreihe an der Rückwand. Kontakt- und Bodenschatten verbinden die Möbel optisch mit dem Raum. Beim Bauen und Verschieben ist die hinterste Reihe freigegeben; eine Vorschau an dieser Reihe trägt „AN DER RÜCKWAND“. Klicks auf den direkt darüberliegenden Wandstreifen rasten für Warenmöbel in diese Reihe ein. Freie Aufstellung im Raum bleibt möglich.
+
+Direkt an der Rückwand platzierte Warenmöbel folgen beim Ausbau der versetzten Rückwand. Frei platzierte Möbel behalten ihre Position. Bei bisherigen Kiosk-Spielständen werden unveränderte Startregale und Startkühlung einmalig an die Rückwand gestellt; selbst umgestellte Möbel werden beibehalten.
+
+Geprüft: Darstellung aller vier Ausbaustufen, Platzierung an der Rückwand, Einrasten der Vorschau, Eingang und Lagerzugang, Kundensimulation, bestehender Verschiebemodus, Spielstandmigration und Wandanschluss bei sämtlichen Ausbauten.
