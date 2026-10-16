@@ -16,7 +16,7 @@ Die Website erscheint nach dem Pages-Deployment unter https://0x0057A4.github.io
 
 WASD oder Pfeiltasten: bewegen. E: an Kasse, Warenmöbeln, Lieferungen, Schmutz und Dieben interagieren. B: Möbelbau öffnen. Escape: Bauauftrag abbrechen. Richtungstasten auf Touchgeräten.
 
-Erst Laden öffnen, Kunden abwarten, zur Kasse unten links laufen und E drücken. Bargeld und EC haben eigene Verkaufsdialoge. Neue Ware bestellen, im rechten Lager annehmen und am passenden Möbel einräumen. Alle Menüs pausieren die Simulation.
+Erst Laden öffnen, Kunden abwarten, zur Kasse im Kiosk laufen und E drücken. Bargeld und EC haben eigene Verkaufsdialoge. Neue Ware bestellen, im rechten Lager annehmen und am passenden Möbel einräumen. Alle Menüs pausieren die Simulation.
 
 ## Systeme
 
@@ -29,3 +29,20 @@ Die 150 Zusatzartikel sind benannte Varianten der zehn Produktfamilien. Dies ist
 ## Prüfung
 
 JavaScript-Syntax und Simulationsabläufe automatisiert geprüft: zwölf simulierte Minuten mit Kunden und Kassenpersonal; Bestellung, Lieferung, Warenannahme und Auffüllen; Produktfreischaltung; manuelle Kassenzahlung; Speichern und Validierung des Imports. Eine visuelle Browserprüfung war in der Erstellungsumgebung nicht verfügbar.
+
+## Kioskstart und Ausbau
+
+Neue Spiele starten mit 2.600 € Bargeld, 35 Verkaufsfeldern und einem separaten kleinen Lager mit neun Feldern. Zur Grundausstattung gehören zwei Warenregale, eine Getränkekühlung, eine Kasse und ein Abfallbehälter. Die drei Warenmöbel enthalten je acht Artikel; pro Startprodukt liegen zusätzlich sechs Stück im Lager. Personal und weitere Möbel werden selbst finanziert.
+
+| Stufe | Verkaufsfelder | Lagerfelder | Ausbaupreis |
+| --- | ---: | ---: | ---: |
+| Kiosk | 35 | 9 | Start |
+| Nachbarschaftsladen | 77 | 12 | 1.800 € |
+| Mini-Markt | 176 | 28 | 4.500 € |
+| Supermarkt | 198 | 30 | 9.000 € |
+
+Unter „Möbel & Ausbau“ wird die nächste Stufe gekauft. Möbel, Ware und Fortschritt bleiben erhalten; der Lagerraum zieht in den erweiterten Anbau um. Bauen ist nur auf gekaufter Verkaufsfläche möglich. Grundbetriebskosten beginnen bei 12 € pro Tag und steigen mit der Ladenstufe. Kundenanzahl wächst mit der Fläche.
+
+Spielstände der ersten Version behalten ihren bisherigen größeren Laden. Für den neuen Kioskstart unter „Management → Neues Spiel“ beginnen; bei Bedarf vorher exportieren.
+
+Zusätzlich geprüft: Startkapital, Kioskfläche, sämtliche Ausbaustufen, Geldabzug, Ablehnung bei zu wenig Geld, Erreichbarkeit der Warenmöbel und Lager in jeder Stufe sowie Migration alter Spielstände.
