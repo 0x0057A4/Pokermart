@@ -72,3 +72,11 @@ Die beiden Startregale und die Getränkekühlung stehen direkt in der hintersten
 Direkt an der Rückwand platzierte Warenmöbel folgen beim Ausbau der versetzten Rückwand. Frei platzierte Möbel behalten ihre Position. Bei bisherigen Kiosk-Spielständen werden unveränderte Startregale und Startkühlung einmalig an die Rückwand gestellt; selbst umgestellte Möbel werden beibehalten.
 
 Geprüft: Darstellung aller vier Ausbaustufen, Platzierung an der Rückwand, Einrasten der Vorschau, Eingang und Lagerzugang, Kundensimulation, bestehender Verschiebemodus, Spielstandmigration und Wandanschluss bei sämtlichen Ausbauten.
+
+## Korrektur: Hinter Schränke laufen
+
+Die Bewegung prüft jetzt die tatsächliche Fußfläche der Figur gegen die Standfläche der Möbel und die Raumgrenzen. Das gerundete Rasterfeld allein reicht nicht mehr als Kollisionsprüfung. Wandnahe Schränke blockieren die Fläche bis zur Rückwand; seitliches Einschieben in ihre Kanten ist ausgeschlossen. Die Tiefensortierung verwendet ebenfalls die Standfläche von Figuren und Möbeln.
+
+Warenmöbel und Pfandautomaten rasten beim Platzieren in der direkt vor der Rückwand liegenden Reihe bündig an die Rückwand ein. Entsprechende wandnahe Möbel in bisherigen Spielständen werden einmalig bündig gestellt, sofern der Platz frei ist. Bereits im Möbelbereich stehende Figuren werden beim Laden auf einen freien benachbarten Platz gesetzt. Weiter im Raum platzierte Möbel bleiben frei aufgestellt. Geld, Produktzuordnung und Warenbestände bleiben erhalten.
+
+Geprüft: die Figurposition aus dem Fehlerbild, seitliche Möbelkollision und Wandgrenzen bei dauerhaft gedrückter Bewegungstaste, freie Bedienung von vorne, Migration alter Spielstände, Wandraster und kostenloses Verschieben, Lagerzugang über alle Ausbaustufen, zehn Minuten Kundensimulation sowie wiederholtes Umstellen während laufender Kundenwege.
