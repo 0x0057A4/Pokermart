@@ -112,3 +112,13 @@ Die Kasse belegt jetzt 2 × 1 Felder; die Textlabels auf dem Tresen entfallen. W
 Am Warenmöbel öffnet „Produkt im Auswahlraster wählen“ ein Raster mit ausschließlich passenden, freigeschalteten Produkten. Jede Kachel zeigt eine Produktabbildung, den Namen, den Lagerbestand und gegebenenfalls die bestehende Zuordnung. Auf schmalen Bildschirmen hat das Raster zwei Spalten, sonst vier. Die Richtungstasten bewegen die Auswahl räumlich im Raster. A übernimmt die Zuordnung und füllt aus dem Lager auf; B kehrt ohne Änderung zur Möbelansicht zurück. Beim Wechsel geht die alte Auslage vollständig zurück ins Lager. Das frühere Produkt-Dropdown entfällt.
 
 Geprüft: zwei belegte Kassenfelder, sämtliche Drehungen einschließlich Kundenbetrieb und manuellem Verkauf, Migration rotierter dreiteiliger Kassen, Rasterbewegung mit zwei/vier Spalten, Auswahl und Abbruch, Beschränkung auf passende freigeschaltete Produkte sowie vollständiger Erhalt von Waren und Geld beim Produktwechsel. Kassenansichten wurden gerendert und visuell geprüft; die Menübedienung wurde als Steuerungslogik geprüft.
+
+## Korrektur: Kassenbild und Papierkorb in den Ecken
+
+Die Registrierkasse wird ohne den zusätzlichen Unterschrank aus dem früheren Bildausschnitt direkt auf einer durchgehenden 2×1-Tischplatte gezeichnet. Monitor, Tastatur und Kassenlade folgen der Ausrichtung. Die Darstellung ist für 0°, 90°, 180° und 270° geprüft; die physische Zweifeld-Fläche bleibt unverändert.
+
+Eine feste Zeilengrenze ließ die Möbelsteuerung bisher eine Reihe vor der unteren Wand enden. Der Cursor und die Platzierungsprüfung verwenden jetzt die tatsächlichen Raumgrenzen. Der Papierkorb lässt sich damit in alle vier freien Raumecken stellen. Der zweifeldrige Eingang bleibt ausdrücklich freizuhalten. Bei jeder Möbelplatzierung werden jetzt sowohl Kunden- als auch Bedienseite sämtlicher Kassen geprüft. Ablehnungen nennen den konkreten Grund, etwa belegtes Feld, blockierter Eingang oder blockierter Bedienplatz.
+
+Geprüft: Papierkorb per A/D-Pad in allen vier Ecken platzieren und erreichen, kein Geldabzug beim Verschieben, unterste Reihe mit dem Steuerkreuz erreichen, Sperre von Eingang und Kassenbedienplatz, sämtliche Kassendrehungen mit Kundenbetrieb, Produkt-Auswahlraster und Bestandsübernahme. Kassenansichten aller vier Richtungen wurden gerendert und visuell geprüft.
+
+Die dauerhaft gespeicherten Logik-Regressionstests lassen sich mit `node tests/smoke.cjs` ausführen. Sie benötigen keine zusätzlichen Pakete; sie ersetzen keinen vollständigen Browsertest.
