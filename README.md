@@ -131,9 +131,15 @@ A an einer nicht bedienbaren oder unbesetzten Kasse öffnet deren Ausrichtung un
 
 Beim manuellen Verkauf startet das Bezahlspiel. Zuerst werden alle Artikel mit A/E gescannt, während ein Zeiger den grünen Bereich durchläuft. Danach folgt je nach Kunde:
 
-- Bargeld: Münzen mit links/rechts wählen, mit A oder hoch hinzufügen und mit runter entfernen. „Leeren“ setzt die Auswahl zurück. „Ausgeben“ bestätigt das exakte Rückgeld. Beträge werden in ganzen Cent geprüft.
+- Bargeld: Münzen direkt antippen oder mit links/rechts auswählen und mit A hinzufügen. Sobald das Rückgeld stimmt, bestätigt ein weiterer Druck auf A die Zahlung. Hoch/runter ist zum Weiterkommen nicht erforderlich; runter kann optional eine Münze entfernen. „Leeren“ und „Ausgeben“ sind zusätzlich direkt antippbar. Soll- und Ist-Rückgeld sind sichtbar; geprüft wird in ganzen Cent.
 - EC: Zwei weitere grüne Timing-Treffer autorisieren die Zahlung.
 
 Erst die vollständig erfolgreiche Zahlung schreibt den Verkauf gut. Fehlversuche erlauben erneutes Probieren. B/Escape oder ein Menüwechsel bricht ohne Abbuchung ab; der Kunde wartet weiter. Das Spielgeschehen pausiert währenddessen, während das Minispiel läuft. Bei verdecktem Browserfenster pausiert auch dessen Zeiger. Kassenpersonal und SB-Kassen verkaufen weiterhin automatisch.
 
 Die Regressionstests decken die gegenüberliegenden Plätze in allen vier Ausrichtungen, getrennte Warteschlangen und Nachrücken, vollständige Bar-/EC-Abläufe, falsches Rückgeld, Timing-Fehler, Abbruch, doppelte Eingaben sowie den Schutz vor vorzeitiger Gutschrift ab. Alle Kassenausrichtungen wurden erneut als Canvas-Grafiken gerendert und visuell geprüft. Die vollständige Browserprüfung der Minispieloberfläche steht weiterhin aus.
+
+## Korrektur der Bedienseite und einfachere Barzahlung
+
+Bei 90° steht das Personal links und der Kunde rechts. Die anderen Ausrichtungen drehen diese Zuordnung entsprechend mit. Grafik, Bedienprüfung, Personalwege, Warteschlange und Platzierungsprüfung verwenden dieselbe Seitenzuordnung. Bestehende Spielstände bleiben erhalten.
+
+Der Münzcursor wechselt mit links/rechts ausschließlich zwischen Münzen. A fügt die gewählte Münze hinzu und wird bei passendem Rückgeld zu „Bezahlen“. Ein weiterer Druck schließt ab, ohne zuerst „Ausgeben“ anwählen zu müssen. Münzfelder können direkt angetippt werden. Die Tests prüfen die abgebildete Ausrichtung sowie Münzauswahl, Touch-Aktionen und Abschluss über A.
