@@ -80,3 +80,15 @@ Die Bewegung prüft jetzt die tatsächliche Fußfläche der Figur gegen die Stan
 Warenmöbel und Pfandautomaten rasten beim Platzieren in der direkt vor der Rückwand liegenden Reihe bündig an die Rückwand ein. Entsprechende wandnahe Möbel in bisherigen Spielständen werden einmalig bündig gestellt, sofern der Platz frei ist. Bereits im Möbelbereich stehende Figuren werden beim Laden auf einen freien benachbarten Platz gesetzt. Weiter im Raum platzierte Möbel bleiben frei aufgestellt. Geld, Produktzuordnung und Warenbestände bleiben erhalten.
 
 Geprüft: die Figurposition aus dem Fehlerbild, seitliche Möbelkollision und Wandgrenzen bei dauerhaft gedrückter Bewegungstaste, freie Bedienung von vorne, Migration alter Spielstände, Wandraster und kostenloses Verschieben, Lagerzugang über alle Ausbaustufen, zehn Minuten Kundensimulation sowie wiederholtes Umstellen während laufender Kundenwege.
+
+## Handheld-Steuerung
+
+Die Bedienung ist wie bei einer tragbaren Spielkonsole angeordnet: links ein dauerhaft sichtbares Steuerkreuz mit WASD-Beschriftung, rechts die A-Taste für Interaktion und die B-Taste für Zurück/Abbrechen. Unten mittig öffnet MENÜ alle bisherigen Shop-Funktionen: Laden öffnen/schließen, Pause, Einkauf/Import, Preise, Möbelkauf/Ausbau, Verschieben, Personal, Erfolge, Verwaltung/Spielstände und Hilfe. Die bisherige obere Buttonleiste entfällt. Die Oberfläche passt in die verfügbare Bildschirmhöhe, einschließlich Hoch- und Querformat.
+
+Möbelkauf: MENÜ → Möbel kaufen → Möbel wählen. WASD, Pfeile oder das Steuerkreuz bewegen einen markierten Rastercursor samt Platzierungsvorschau. A, E, Enter oder Leertaste bestätigt den Kauf am gültigen Platz. Erst bei erfolgreicher Platzierung wird bezahlt. B oder Escape beendet den Bauauftrag kostenlos.
+
+Verschieben: MENÜ → Möbel verschieben. Mit WASD/Steuerkreuz das vorhandene Möbel wählen, A/E zum Aufnehmen drücken, den Cursor zum Ziel bewegen und erneut A/E zum Abstellen drücken. Ware und Geld bleiben unverändert. Während Bau- und Verschiebemodus pausieren Figur, Kunden und Simulation. Die bestehende Kollisions- und Laufwegprüfung bleibt aktiv. Maus/Tap-Platzierung ist zusätzlich möglich; die Koordinaten berücksichtigen die unverzerrte Darstellung des Spielfelds.
+
+Tastatur: WASD/Pfeile bewegen Figur oder Cursor. E/Enter/Leertaste entspricht A; Q öffnet das Menü; Escape bricht ab oder öffnet das Menü. Die direkten Tastenkürzel B für Möbelkauf und M für Verschieben bleiben verfügbar.
+
+Geprüft: Bau und Verschieben vollständig mit Richtungssteuerung und A/E, kostenlose Abbrüche, Ablehnung belegter Ziele, einmaliger Geldabzug, Touch-Steuerkreuz, vollständiger Funktionsumfang im Menü, Pause im Möbelmodus sowie bisherige Kollisions-, Kunden- und Speicherfunktionen.
