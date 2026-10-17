@@ -122,3 +122,18 @@ Eine feste Zeilengrenze ließ die Möbelsteuerung bisher eine Reihe vor der unte
 Geprüft: Papierkorb per A/D-Pad in allen vier Ecken platzieren und erreichen, kein Geldabzug beim Verschieben, unterste Reihe mit dem Steuerkreuz erreichen, Sperre von Eingang und Kassenbedienplatz, sämtliche Kassendrehungen mit Kundenbetrieb, Produkt-Auswahlraster und Bestandsübernahme. Kassenansichten aller vier Richtungen wurden gerendert und visuell geprüft.
 
 Die dauerhaft gespeicherten Logik-Regressionstests lassen sich mit `node tests/smoke.cjs` ausführen. Sie benötigen keine zusätzlichen Pakete; sie ersetzen keinen vollständigen Browsertest.
+
+## Kassenseiten, vollständige Drehung und Bezahl-Minispiel
+
+Die gesamte Kassengrafik einschließlich Tischplatte und Unterschrank dreht jetzt als eine Einheit. Zuvor blieb die sichtbare Unterschrankfront trotz veränderter Grundfläche nach unten ausgerichtet. Der erste Kunde steht direkt gegenüber dem Bedienplatz am Kassenfeld. Weitere Kunden erhalten getrennte Plätze ausschließlich auf der Kundenseite. Die Schlange rückt nach dem Verkauf oder Weggehen des ersten Kunden nach. Es wird immer der erste wartende Kunde bedient; später angekommene Kunden können ihn nicht überspringen.
+
+A an einer nicht bedienbaren oder unbesetzten Kasse öffnet deren Ausrichtung und die Aktionen „Gesamte Kasse 90° drehen“ und „Kasse verschieben“. Das Vorschau-Hinweisfeld nennt Bedien- und Kundenseite. Seitliches Aufstellen ist mit 90° oder 270° möglich. Grafik, Kollision, Kundenplatz und Personalplatz verwenden dieselbe Drehung. Manuell wird am eigentlichen Bedienplatz kassiert.
+
+Beim manuellen Verkauf startet das Bezahlspiel. Zuerst werden alle Artikel mit A/E gescannt, während ein Zeiger den grünen Bereich durchläuft. Danach folgt je nach Kunde:
+
+- Bargeld: Münzen mit links/rechts wählen, mit A oder hoch hinzufügen und mit runter entfernen. „Leeren“ setzt die Auswahl zurück. „Ausgeben“ bestätigt das exakte Rückgeld. Beträge werden in ganzen Cent geprüft.
+- EC: Zwei weitere grüne Timing-Treffer autorisieren die Zahlung.
+
+Erst die vollständig erfolgreiche Zahlung schreibt den Verkauf gut. Fehlversuche erlauben erneutes Probieren. B/Escape oder ein Menüwechsel bricht ohne Abbuchung ab; der Kunde wartet weiter. Das Spielgeschehen pausiert währenddessen, während das Minispiel läuft. Bei verdecktem Browserfenster pausiert auch dessen Zeiger. Kassenpersonal und SB-Kassen verkaufen weiterhin automatisch.
+
+Die Regressionstests decken die gegenüberliegenden Plätze in allen vier Ausrichtungen, getrennte Warteschlangen und Nachrücken, vollständige Bar-/EC-Abläufe, falsches Rückgeld, Timing-Fehler, Abbruch, doppelte Eingaben sowie den Schutz vor vorzeitiger Gutschrift ab. Alle Kassenausrichtungen wurden erneut als Canvas-Grafiken gerendert und visuell geprüft. Die vollständige Browserprüfung der Minispieloberfläche steht weiterhin aus.
