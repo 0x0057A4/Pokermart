@@ -138,8 +138,12 @@ Erst die vollständig erfolgreiche Zahlung schreibt den Verkauf gut. Fehlversuch
 
 Die Regressionstests decken die gegenüberliegenden Plätze in allen vier Ausrichtungen, getrennte Warteschlangen und Nachrücken, vollständige Bar-/EC-Abläufe, falsches Rückgeld, Timing-Fehler, Abbruch, doppelte Eingaben sowie den Schutz vor vorzeitiger Gutschrift ab. Alle Kassenausrichtungen wurden erneut als Canvas-Grafiken gerendert und visuell geprüft. Die vollständige Browserprüfung der Minispieloberfläche steht weiterhin aus.
 
-## Korrektur der Bedienseite und einfachere Barzahlung
+## Kassenenden, Personal und Preiseinstellung
 
-Bei 90° steht das Personal links und der Kunde rechts. Die anderen Ausrichtungen drehen diese Zuordnung entsprechend mit. Grafik, Bedienprüfung, Personalwege, Warteschlange und Platzierungsprüfung verwenden dieselbe Seitenzuordnung. Bestehende Spielstände bleiben erhalten.
+Die Bedienplätze richten sich nach den beiden Enden des 2×1-Möbels: Personal steht am Ende mit Kassengerät und Tastatur, der erste Kunde am anderen Ende mit Warenablage. Bei der senkrechten 90°-Ausrichtung ist der Verkäufer unten und der Kunde oben. Die Kassentastatur zeigt zum Bedienplatz. Weitere Kunden warten hinter dem Ablageende. Diese Zuordnung gilt gemeinsam für Grafik, Interaktion, Personal, Warteschlange und Platzierungsprüfung in allen vier Ausrichtungen. Angestellte bleiben an der zugewiesenen Kasse und wechseln nach deren Drehung den Bedienplatz. Bei einer neuen Wegplanung laufen Kunden zuerst zur nächsten Feldmitte, damit sie beim Nachrücken keine Möbelecken schneiden.
 
-Der Münzcursor wechselt mit links/rechts ausschließlich zwischen Münzen. A fügt die gewählte Münze hinzu und wird bei passendem Rückgeld zu „Bezahlen“. Ein weiterer Druck schließt ab, ohne zuerst „Ausgeben“ anwählen zu müssen. Münzfelder können direkt angetippt werden. Die Tests prüfen die abgebildete Ausrichtung sowie Münzauswahl, Touch-Aktionen und Abschluss über A.
+Preise sind unter **MENÜ → Preise einstellen** erreichbar. Einen Verkaufspreis antippen oder mit den Richtungen auswählen und mit A bearbeiten. Hoch/runter verändert um 0,05 €, links/rechts um 0,50 €. A speichert, B verwirft. Die Touch-Auswahl aktiviert das tatsächlich angetippte Produkt. Am Regal führt „Verkaufspreis einstellen“ direkt zum zugehörigen Preis.
+
+Der Münzcursor wechselt mit links/rechts ausschließlich zwischen Münzen. A fügt die gewählte Münze hinzu und wird bei passendem Rückgeld zu „Bezahlen“. Ein weiterer Druck schließt ab, ohne zuerst „Ausgeben“ anwählen zu müssen. Münzfelder können direkt angetippt werden. Soll- und Ist-Rückgeld sind sichtbar.
+
+Prüfung: `node tests/smoke.cjs`. Die Tests umfassen alle Ausrichtungen und Laufwege, manuelle und automatische Verkäufe, die Mitarbeiterzuordnung, direkte Preiswahl, den Regalzugang zur Preiseinstellung und Bar-/EC-Abläufe. Die Kasse wurde in allen Ausrichtungen als Canvas-Grafik gerendert. Eine vollständige Prüfung auf einem echten Mobilbrowser steht noch aus.
