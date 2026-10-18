@@ -176,3 +176,11 @@ Aktueller Ablauf ersetzt die früher beschriebenen Scan- und Bargeldannahme-Schr
 - **Karte:** Die Leiste erscheint direkt für den gesamten Warenkorb. Ein einziger Treffer im grünen Bereich bezahlt alle Produkte gemeinsam. Es gibt weder Einzelprodukt-Scans noch eine zweite Kartenfreigabe. Ein Fehlversuch lässt denselben Einkauf offen.
 
 Die 39 Regressionstests prüfen insbesondere Mehrprodukt-Einkäufe, einmalige Gutschrift, Fehlversuche, Abbruch, direkte Rückgeldeingabe und die bisherigen Kasseninteraktionen. Menüüberschrift: „18.10.5“. Die Prüfung im realen Browser steht weiterhin aus.
+
+## Besen aus dem Lager · 18.10.6
+
+Bodenschmutz kann der Spieler nur mit dem Besen aufwischen. Die Halterung steht sichtbar oben rechts im Lager und folgt dessen Ausbau. In Reichweite nimmt E bzw. die runde A-Taste den Besen mit; dieselbe Interaktion an der Halterung legt ihn wieder zurück. Solange der Besen getragen wird, zeigt die Figur ihn und die HUD-Hinweise wechseln zu Aufwischen bzw. Ablegen. Der Besen bleibt nach dem Putzen in der Hand und muss ausdrücklich zurückgelegt werden.
+
+Mit Besen hat Aufwischen Vorrang, auch am Kassen-Bedienplatz. Kassieren und normale Warenaktionen sind erst nach der Rückgabe wieder möglich. Ohne Besen entfernt weder die normale Interaktion noch der Mülleimer Bodenschmutz. Angestellte Reinigungskräfte arbeiten weiterhin automatisch. Der Status wird mitgespeichert; alte Spielstände ohne dieses Feld erhalten den Besen in der Halterung. Die Halterung beeinträchtigt Lieferungen nicht.
+
+43 Regressionstests umfassen das Abholen, Putzen direkt an einer besetzten Kasse, verweigertes Kassieren während des Tragens, ausdrückliche Rückgabe, anschließenden Kassenbetrieb, Schutz vor Putzen ohne Besen, alte Speicherstände und den Lagerausbau. Die Prüfung der Darstellung im echten Browser steht weiterhin aus.
