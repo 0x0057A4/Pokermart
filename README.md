@@ -132,7 +132,7 @@ A an einer nicht bedienbaren oder unbesetzten Kasse öffnet deren Ausrichtung un
 Beim manuellen Verkauf startet das Bezahlspiel. Zuerst werden alle Artikel mit A/E gescannt, während ein Zeiger den grünen Bereich durchläuft. Danach folgt je nach Kunde:
 
 - Bargeld: Münzen direkt antippen oder mit links/rechts auswählen und mit A hinzufügen. Sobald das Rückgeld stimmt, bestätigt ein weiterer Druck auf A die Zahlung. Hoch/runter ist zum Weiterkommen nicht erforderlich; runter kann optional eine Münze entfernen. „Leeren“ und „Ausgeben“ sind zusätzlich direkt antippbar. Soll- und Ist-Rückgeld sind sichtbar; geprüft wird in ganzen Cent.
-- EC: Zwei weitere grüne Timing-Treffer autorisieren die Zahlung.
+- EC/Karte: Ein grüner Timing-Treffer autorisiert den gesamten Einkauf, unabhängig von der Artikelzahl.
 
 Erst die vollständig erfolgreiche Zahlung schreibt den Verkauf gut. Fehlversuche erlauben erneutes Probieren. B/Escape oder ein Menüwechsel bricht ohne Abbuchung ab; der Kunde wartet weiter. Das Spielgeschehen pausiert währenddessen, während das Minispiel läuft. Bei verdecktem Browserfenster pausiert auch dessen Zeiger. Kassenpersonal und SB-Kassen verkaufen weiterhin automatisch.
 
@@ -167,3 +167,12 @@ Zusätzliche Tests bilden die tatsächliche Interaktion am Bedienplatz, vorzeiti
 Am Bedienplatz öffnet E bzw. die runde A-Taste das Kassenfenster auch bei pausiertem Spiel oder laufender Spieleranimation. Ist der Kunde noch nicht bereit, bleibt ein sichtbares Fenster „Kasse bereit“ offen. Ausschließlich dieses Wartefenster lässt die Simulation weiterlaufen; andere Menüs und aktive Bezahlspiele pausieren sie weiterhin. Bei Pause bietet das Wartefenster eine Fortsetzen-Aktion. Sobald der erste Kunde vor der Kasse steht, beginnt die Zahlung. B oder Schließen verwirft den Warteauftrag synchron.
 
 Ein verspätetes natives Dialog-close-Ereignis darf den Zahlungszustand nicht löschen, wenn das Dialogfenster inzwischen bereits wieder geöffnet wurde. Diese Reihenfolge wird separat geprüft. Ein bereits am Kundenplatz stehender Kunde gilt unabhängig von verbliebenen Wegpunkten als angekommen. 39 Regressionstests umfassen diese Fälle; eine Prüfung im Browser des Nutzers ist noch offen. Die Menüüberschrift zeigt „18.10.4“, damit eine alte geladene Version erkennbar ist.
+
+## Bezahlung vereinfacht · 18.10.5
+
+Aktueller Ablauf ersetzt die früher beschriebenen Scan- und Bargeldannahme-Schritte:
+
+- **Bargeld:** Einkauf, erhaltenes Bargeld und benötigtes Rückgeld werden angezeigt. Ausschließlich den Wechselbetrag im Numpad eingeben und „Auszahlen“ bzw. Enter/A bestätigen. Kein Abtippen des erhaltenen Betrags und keine vorgeschaltete BAR-Bestätigung. Auch bei mehreren Artikeln bleibt es eine Eingabe. Passend gezahlte Käufe werden mit 0 € Wechselgeld bestätigt.
+- **Karte:** Die Leiste erscheint direkt für den gesamten Warenkorb. Ein einziger Treffer im grünen Bereich bezahlt alle Produkte gemeinsam. Es gibt weder Einzelprodukt-Scans noch eine zweite Kartenfreigabe. Ein Fehlversuch lässt denselben Einkauf offen.
+
+Die 39 Regressionstests prüfen insbesondere Mehrprodukt-Einkäufe, einmalige Gutschrift, Fehlversuche, Abbruch, direkte Rückgeldeingabe und die bisherigen Kasseninteraktionen. Menüüberschrift: „18.10.5“. Die Prüfung im realen Browser steht weiterhin aus.
