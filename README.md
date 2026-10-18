@@ -147,3 +147,11 @@ Preise sind unter **MENÜ → Preise einstellen** erreichbar. Einen Verkaufsprei
 Der Münzcursor wechselt mit links/rechts ausschließlich zwischen Münzen. A fügt die gewählte Münze hinzu und wird bei passendem Rückgeld zu „Bezahlen“. Ein weiterer Druck schließt ab, ohne zuerst „Ausgeben“ anwählen zu müssen. Münzfelder können direkt angetippt werden. Soll- und Ist-Rückgeld sind sichtbar.
 
 Prüfung: `node tests/smoke.cjs`. Die Tests umfassen alle Ausrichtungen und Laufwege, manuelle und automatische Verkäufe, die Mitarbeiterzuordnung, direkte Preiswahl, den Regalzugang zur Preiseinstellung und Bar-/EC-Abläufe. Die Kasse wurde in allen Ausrichtungen als Canvas-Grafik gerendert. Eine vollständige Prüfung auf einem echten Mobilbrowser steht noch aus.
+
+## Kassen-Numpad und markierter Bedienplatz
+
+Nach dem Scannen öffnet die manuelle Barzahlung ein visuelles Kassenmenü. Der Einkauf und der vom Kunden gegebene Betrag sind sichtbar. Den erhaltenen Betrag mit Ziffern und Dezimalkomma eingeben und mit **BAR** starten. Anschließend das angezeigte Rückgeld eingeben und mit **Auszahlen** bestätigen. Tastaturziffern, Punkt/Komma, Backspace, Delete und Enter funktionieren ebenso wie Touch und Steuerkreuz mit A. C leert die Eingabe. Optional kann auf die bisherige Münzauswahl gewechselt werden. Falsche Beträge schreiben keinen Umsatz gut; Abbruch erhält Geld und wartenden Kunden. Auch passende Barzahlung ohne Rückgeld ist möglich.
+
+Ein blaugrünes Fußsymbol mit Pfeil markiert das freie Bedienfeld hinter jeder Kasse und dreht beim Möbel mit. Am markierten Feld hat die Kasseninteraktion Vorrang vor nahen Möbeln und Schmutz. Die Kündigung über `fireStaff` entfernt beim letzten Mitarbeitenden dessen Laufzeitfigur und Animationsdaten und speichert die Änderung. Manuelles Kassieren nach Kündigung ist durch einen vollständigen Barverkauf getestet.
+
+Die Regressionstests prüfen zusätzlich Eingaben, falsche Kundensummen, Rückgeld, einmalige Gutschrift, Numpadnavigation, Löschen, Münzwechsel, Abbruch und Bedienplatzmarkierungen in allen vier Drehungen. Eine visuelle Prüfung im echten Mobilbrowser steht noch aus.
