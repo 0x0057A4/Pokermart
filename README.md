@@ -1,6 +1,10 @@
-# Pokermart 2.1
+# Pokermart 2.1.1
 
 Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
+
+## Version 2.1.1 – Kunden-Assets
+
+Acht eigenständige Kundendesigns mit verschiedenen Frisuren, Kleidungsstücken, Altersgruppen und Hauttönen besitzen jeweils echte Ansichten von vorn, hinten, links und rechts. Die 32 Ausgangs-Sprites sind 128 Pixel hoch. Jedes der 20 Kundenprofile bleibt fest einem Design zugeordnet; Farbe und Aussehen wechseln beim Richtungswechsel nicht. Bewegung nutzt dieselben Zeichenmaße und Fußpositionen wie der Verkäufer. Kunden mit Waren im Korb tragen einen sichtbaren Einkaufskorb. Grafik und Profilzuordnung ändern keine Waren, Preise oder Spielstände.
 
 ## Version 2.1 – Detailreiche Pixel-Assets
 
@@ -52,8 +56,11 @@ node tests/smoke.cjs
 node tests/career.cjs
 node tests/atlas.cjs
 node tests/premium.cjs
+node tests/customers.cjs
 ```
 
 Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüfgruppen zu Kassen, Besen, Platzierung, Warenbestand, Aufträgen, Rängen, Lieferanten, Sonderbestellungen, Upgrades, Ereignissen und Speicherung. Simulationsläufe decken mehrere Spieltage und automatische Verkäufe ab. Raumansichten wurden über die tatsächlichen Canvas-Zeichenbefehle in PNGs gerendert und visuell geprüft. Drei zusätzliche Atlas-Prüfgruppen kontrollieren die eingebettete PNG, sämtliche Ausschnitte und den aktivierten Sprite-Renderer. Das Sprite-Sheet wurde in Raumansichten visuell geprüft. Eine vollständige Prüfung im echten Browser steht noch aus.
 
 Drei zusätzliche Prüfgruppen für Version 2.1 prüfen sämtliche 29 neuen Ausschnitte, Richtungsbilder, den Szenenpuffer in doppelter Auflösung, leere Auslagen und den Besen. Zusammen mit den bisherigen Prüfungen bestehen 58 unterschiedliche Prüfgruppen. Native Ansichten von Laden, Lager und allen vier Kassenausrichtungen wurden visuell geprüft; ein vollständiger Browsertest steht aus.
+
+Version 2.1.1 ergänzt drei Prüfgruppen: Vollständigkeit und Grenzen aller 32 Kunden-Sprites, feste Profilzuordnung und Richtungswechsel sowie Darstellung einer gemischten Kundengruppe ohne Spielstandänderung. Insgesamt bestehen 61 unterschiedliche Prüfgruppen. Alle acht Figuren wurden im Laden und an der gedrehten Kasse visuell geprüft. Ein vollständiger Browsertest steht weiterhin aus.
