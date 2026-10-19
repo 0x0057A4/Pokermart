@@ -1,14 +1,18 @@
-# Pokermart 2.0.1
+# Pokermart 2.1
 
 Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
 
-## Version 2.0.1 – Grafikpflege
+## Version 2.1 – Detailreiche Pixel-Assets
+
+29 neue Sprite-Ausschnitte ersetzen die sichtbaren Figuren und Möbel: vier Kassenansichten, vier Richtungen für Verkäufer und Kunden, Verkaufs- und Lagerregale, Kühlmöbel, Automaten, Müllbehälter, Pflanze, Besen, Karton, Produkte und Einkaufskorb. Figuren besitzen 96 Pixel hohe Ausgangsbilder; Kundenmäntel erhalten unterschiedliche Farbvarianten. Harte Transparenz entfernt Farbsäume. Die Szene wird mit 2500 × 1600 Pixeln statt 1250 × 800 Pixeln gezeichnet und ohne Weichzeichnung ausgegeben. Die höheren Detailstufen ändern keine Kollisionen oder Spielstände.
+
+## Frühere Grafikpflege
 
 Saubere Fliesen und einheitliche Wandmaterialien ersetzen die vergrößerten Bodenfugen. Figuren werden proportional und kleiner dargestellt. Verkaufsregale erhalten dunkle Rückwände, gleichmäßig verteilte Waren und Preisleisten. Der Tresen behält beim Drehen seine aufrechte Perspektive; Tastatur sowie Kunden- und Mitarbeiterseite folgen seiner Ausrichtung. Dezente Fußmarkierungen und kleinere Emotes halten den Blick auf das Spiel frei. Farben der Bedienoberfläche passen zu den Raummaterialien.
 
 ## Sprite-Sheet
 
-Das Spiel verwendet das vom Nutzer bereitgestellte Supermarkt-Sprite-Sheet. Die Originaldatei wurde ohne Neuzeichnung in 77 Ausschnitte für Figuren, Möbel, Produkte, Lager, Umgebung und Emotes zerlegt. Schwarze Hintergrundflächen wurden am Rand transparent freigestellt. Ein gepackter PNG-Atlas mit 30 Kundenansichten ist direkt in der HTML eingebettet; alle Ausschnittgrenzen werden beim Laden geprüft. Das Spiel benötigt keine zusätzlichen Bilddateien oder Netzwerkzugriffe.
+Das vom Nutzer bereitgestellte Supermarkt-Sprite-Sheet bleibt als Fallback im Spiel. Die Originaldatei wurde ohne Neuzeichnung in 77 Ausschnitte für Figuren, Möbel, Produkte, Lager, Umgebung und Emotes zerlegt. Schwarze Hintergrundflächen wurden am Rand transparent freigestellt. Dieser gepackte Fallback-PNG-Atlas mit 30 Kundenansichten ist direkt in der HTML eingebettet; alle Ausschnittgrenzen werden beim Laden geprüft. Das Spiel benötigt keine zusätzlichen Bilddateien oder Netzwerkzugriffe.
 
 ## Spielen
 
@@ -47,6 +51,9 @@ Der bisherige lokale Speicherschlüssel `pokermart-v1` bleibt bestehen. Alte Spi
 node tests/smoke.cjs
 node tests/career.cjs
 node tests/atlas.cjs
+node tests/premium.cjs
 ```
 
 Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüfgruppen zu Kassen, Besen, Platzierung, Warenbestand, Aufträgen, Rängen, Lieferanten, Sonderbestellungen, Upgrades, Ereignissen und Speicherung. Simulationsläufe decken mehrere Spieltage und automatische Verkäufe ab. Raumansichten wurden über die tatsächlichen Canvas-Zeichenbefehle in PNGs gerendert und visuell geprüft. Drei zusätzliche Atlas-Prüfgruppen kontrollieren die eingebettete PNG, sämtliche Ausschnitte und den aktivierten Sprite-Renderer. Das Sprite-Sheet wurde in Raumansichten visuell geprüft. Eine vollständige Prüfung im echten Browser steht noch aus.
+
+Drei zusätzliche Prüfgruppen für Version 2.1 prüfen sämtliche 29 neuen Ausschnitte, Richtungsbilder, den Szenenpuffer in doppelter Auflösung, leere Auslagen und den Besen. Zusammen mit den bisherigen Prüfungen bestehen 58 unterschiedliche Prüfgruppen. Native Ansichten von Laden, Lager und allen vier Kassenausrichtungen wurden visuell geprüft; ein vollständiger Browsertest steht aus.
