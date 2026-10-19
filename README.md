@@ -1,186 +1,48 @@
-# Pokermart
+# Pokermart 2.0
 
-Spielbarer Shopkeeper-Prototyp, komplett in `index.html`. Grafiken, CSS und JavaScript sind eingebettet; keine Installation, Bibliotheken, Build-Schritte oder Server nötig.
+Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
 
-## GitHub Pages
+## Version 2.0
 
-Im Repository **Settings → Pages → Build and deployment → Deploy from a branch** einstellen:
+Das Spiel verwendet das vom Nutzer bereitgestellte Supermarkt-Sprite-Sheet. Die Originaldatei wurde ohne Neuzeichnung in 77 Ausschnitte für Figuren, Möbel, Produkte, Lager, Umgebung und Emotes zerlegt. Schwarze Hintergrundflächen wurden am Rand transparent freigestellt. Ein gepackter PNG-Atlas mit 30 Kundenansichten ist direkt in der HTML eingebettet; alle Ausschnittgrenzen werden beim Laden geprüft. Das Spiel benötigt keine zusätzlichen Bilddateien oder Netzwerkzugriffe.
 
-- Branch: `main`
-- Folder: `/ (root)`
-- Save
+## Spielen
 
-Die Website erscheint nach dem Pages-Deployment unter https://0x0057A4.github.io/Pokermart/ .
+- WASD / Pfeiltasten: laufen oder Möbelcursor bewegen.
+- E, Enter oder runde A-Taste: interagieren und Menüs bestätigen.
+- Q / Menü-Taste: alle Funktionen öffnen; B / Escape: zurück.
+- Barzahlung: nur das Rückgeld eingeben und einmal auszahlen.
+- Kartenzahlung: ein Treffer im grünen Bereich bezahlt den ganzen Warenkorb.
+- Zum Putzen den Besen im Lager abholen und anschließend dort zurücklegen. Mit Besen hat Putzen auch am Kassenplatz Vorrang.
 
-## Bedienung
+## Fortschritt
 
-WASD oder Pfeiltasten: bewegen. E: an Kasse, Warenmöbeln, Lieferungen, Schmutz und Dieben interagieren. B: Möbelbau öffnen. Escape: Bauauftrag abbrechen. Richtungstasten auf Touchgeräten.
+**Ladenbuch:** Acht Ränge und 14 konkrete Aufträge mit Geld- und Erfahrungsbelohnungen. Abgeholte Belohnungen können nicht erneut beansprucht werden. Ausbau und Automatisierung werden durch Rang und vorhandenes Geld freigeschaltet.
 
-Erst Laden öffnen, Kunden abwarten, zur Kasse im Kiosk laufen und E drücken. Bargeld und EC haben eigene Verkaufsdialoge. Neue Ware bestellen, im rechten Lager annehmen und am passenden Möbel einräumen. Alle Menüs pausieren die Simulation.
+**Tagesaufträge und Wochenkalender:** Jeder Spieltag bietet ein Verkaufsziel sowie ein Ereignis. Der siebentägige Zyklus verändert Besuchshäufigkeit, Warenkorbgröße, Preisgrenzen, nachgefragte Warengruppen oder Lieferzeiten. Belohnungen sind einmal pro Spieltag abholbar. Ein Spieltag dauert vier Minuten; außerhalb des geöffneten Spiels vergeht keine Zeit.
 
-## Systeme
+**Lieferanten:** Kiez & Korn, Fernhandel Fuchs und Goldblatt unterscheiden sich bei Preis und Lieferzeit. Tatsächlich angenommene Lieferkartons erhöhen die Beziehung. Nach 3, 8, 16 und 30 Lieferungen steigt die Stufe: je 3 % Rabatt und 10 % kürzere Grundlieferzeit. Ein Lieferengpass verlängert regionale Lieferungen. Premium-Editionen benötigen Goldblatt-Stufe 1 und Ladenrang 7 und werden ausschließlich dort bestellt.
 
-20 Kundenprofile, 10 Anfangsartikel und 150 freischaltbare Produktvarianten; Einkauf und langsamere, günstigere Importlieferungen; Produktpreise, Lager und Auslagen; Regale, Kühlung und Tiefkühlung; Möbelplatzierung mit Laufwegprüfung, Flächenerweiterung, Personal, Selbstbedienungskassen, Pfandservice, Schmutz und Diebstahl.
+**Stammkunden:** Nach drei bezahlten Einkäufen gelten bekannte Profile als Stammkunden. Sauberkeit und erfolgreiche Besuche verbessern die Bindung; unzufriedenes Weggehen senkt sie. Stammkunden kehren gezielter wieder und erhalten eine längere Geduld. Ihre besonderen Bestellungen werden aus dem Lagerbestand erfüllt, verfallen nach einer Frist und zahlen 20 % Auftragsbonus.
 
-Ein Spieltag dauert vier Minuten. Personal kostet 85 € je Person und Tag, dazu kommen Betriebskosten. Fortschritt wird im Browser automatisch gespeichert. JSON-Export und Import sind im Management-Menü verfügbar. Keine Offline-Fortschritte.
+**Ausstattung:** Aufgewertete Warenmöbel erhalten tatsächlich 36 bzw. 48 Plätze. Kassen-Upgrades verkürzen die automatische Bedienzeit und verbreitern das grüne Kartenfeld. Kühlmöbel benötigen mit Upgrades weniger Betriebskosten. Möbel behalten beim Aufwerten Position, Produkt und Bestand.
 
-Die 150 Zusatzartikel sind benannte Varianten der zehn Produktfamilien. Dies ist eine erste spielbare Version; Kunden und Personal verwenden vereinfachte Simulationsregeln. Das bereitgestellte Sprite-Asset wird im Spiel verwendet.
+## Räume und Grafik
+
+Die Darstellung läuft über einen gemeinsamen, anschließend ohne Glättung skalierten Szenenpuffer. Lagerregale, Lieferannahme und kleine Besenhalterung ersetzen die übergroßen Raumtexte. Hinweise und genaue Mengen erscheinen in Reichweite bzw. im Lagerbestandsmenü. Lagerregale besitzen tatsächliche Kollision; Besen und Annahme bleiben erreichbar.
+
+Die Sprites bleiben ohne Weichzeichnung. Die gesamte 2×1-Kasse dreht mit ihrer Tastatur, dem Mitarbeiterplatz und dem gegenüberliegenden Kundenplatz. Sichtbare Produkte in Verkaufs- und Lagerregalen entsprechen dem Bestand; leere Auslagen sind leer. Kleine Handwerkszeuge werden passend zur Figur dargestellt.
+
+## Spielstände
+
+Der bisherige lokale Speicherschlüssel `pokermart-v1` bleibt bestehen. Alte Spielstände behalten Geld, Möbel, Waren, Ausbau und Personal. Fehlender Karrierefortschritt wird ergänzt; vorhandene Ausbaustufen erhalten einen passenden Mindest-Rang. Beziehungen, Aufträge, Möbelstufen und abgeholte Belohnungen werden gespeichert und beim Import validiert. Export und Import bleiben über Management erreichbar.
 
 ## Prüfung
 
-JavaScript-Syntax und Simulationsabläufe automatisiert geprüft: zwölf simulierte Minuten mit Kunden und Kassenpersonal; Bestellung, Lieferung, Warenannahme und Auffüllen; Produktfreischaltung; manuelle Kassenzahlung; Speichern und Validierung des Imports. Eine visuelle Browserprüfung war in der Erstellungsumgebung nicht verfügbar.
-
-## Kioskstart und Ausbau
-
-Neue Spiele starten mit 2.600 € Bargeld, 35 Verkaufsfeldern und einem separaten kleinen Lager mit neun Feldern. Zur Grundausstattung gehören zwei Warenregale, eine Getränkekühlung, eine Kasse und ein Abfallbehälter. Die drei Warenmöbel enthalten je acht Artikel; pro Startprodukt liegen zusätzlich sechs Stück im Lager. Personal und weitere Möbel werden selbst finanziert.
-
-| Stufe | Verkaufsfelder | Lagerfelder | Ausbaupreis |
-| --- | ---: | ---: | ---: |
-| Kiosk | 35 | 9 | Start |
-| Nachbarschaftsladen | 77 | 12 | 1.800 € |
-| Mini-Markt | 176 | 28 | 4.500 € |
-| Supermarkt | 198 | 30 | 9.000 € |
-
-Unter „Möbel & Ausbau“ wird die nächste Stufe gekauft. Möbel, Ware und Fortschritt bleiben erhalten; der Lagerraum zieht in den erweiterten Anbau um. Bauen ist nur auf gekaufter Verkaufsfläche möglich. Grundbetriebskosten beginnen bei 12 € pro Tag und steigen mit der Ladenstufe. Kundenanzahl wächst mit der Fläche.
-
-Spielstände der ersten Version behalten ihren bisherigen größeren Laden. Für den neuen Kioskstart unter „Management → Neues Spiel“ beginnen; bei Bedarf vorher exportieren.
-
-Zusätzlich geprüft: Startkapital, Kioskfläche, sämtliche Ausbaustufen, Geldabzug, Ablehnung bei zu wenig Geld, Erreichbarkeit der Warenmöbel und Lager in jeder Stufe sowie Migration alter Spielstände.
-
-## Bewegungs- und Aktionsanimationen
-
-Figuren verwenden Vorder-, Rück- und Seitenansichten aus dem bereitgestellten Sprite-Asset. Vier Gehphasen bewegen Arme und Beine getrennt; Schrittzyklus, Körperbewegung, Schatten und dezente Schrittpartikel folgen der tatsächlich zurückgelegten Strecke. Im Stillstand endet die Schrittbewegung. Auch Kunden wechseln ihre Blickrichtung entlang ihrer Laufwege.
-
-Kassieren, Einräumen, Lieferannahme, Reinigen, Pfandservice und Ansprechen von Dieben besitzen eigene zeitlich begrenzte Aktionsposen mit Karton-, Besen- oder Geldbewegungen. Kunden zeigen das Einpacken, Mitarbeitende die zugehörigen Arbeitsposen. Aktionen blockieren die Spielfigur kurz, bis die Bewegung abgeschlossen ist. Pausen und offene Menüs halten die Animationszeit an. Der Animationszustand ist vom Spielstand getrennt; vorhandene Spielstände bleiben nutzbar.
-
-Geprüft: Richtungswechsel, Schrittfortschritt, Stillstand, Aktionssperre, Ablauf der Aktionsdauer, Pause und Speicherkompatibilität; Canvas-Darstellung der vier Richtungen, Gehphasen und Spielwelt visuell geprüft. Vollständige Browserprüfung weiterhin nicht verfügbar.
-
-## Möbel verschieben
-
-Über „Möbel verschieben“, Taste M, das Baumenü oder die Möbelansicht lässt sich der Verschiebemodus öffnen. Erst das vorhandene Möbel anklicken, dann den neuen Zielplatz. Regale, Kühlschränke, Gefriertruhen, Kassen, SB-Kassen, Pfandautomaten, Pflanzen und Abfallbehälter können kostenlos umgestellt werden. Produktzuordnung und Warenbestand bleiben erhalten.
-
-Während des Verschiebens pausiert die Simulation. Das Originalmöbel bleibt bis zur gültigen Platzierung stehen; eine Vorschau zeigt den Zielplatz in Grün oder Rot. Escape oder „Verschieben beenden“ bricht ohne Änderung ab. Bauen ist auf gekaufte Verkaufsfläche begrenzt. Belegte Felder, Figurenpositionen sowie versperrte Zugänge zu Möbeln, Lager oder Ausgang werden abgewiesen. Kunden erhalten nach dem Umstellen neue Wege zu ihren bisherigen Zielen. Spielstandformat unverändert.
-
-Geprüft: kostenloses Verschieben bei leerer Kasse, Erhalt von Objektidentität und Ware, Umstellen einer Kasse, ungültige Zielplätze, Abbruch, Pause/Fortsetzen, Ausgangswege für Kunden und Spielfigur sowie Verkaufsablauf und Speicherstand nach der Änderung.
-
-## Sichtbare Wände und Möbel an der Rückwand
-
-Shop und Lager besitzen hohe Rückwände mit Mauerkrone, heller Innenfläche und Sockelleiste. Die Seitenwände und die niedrige Vorderwand zeigen die Raumgrenzen, ohne das Spielgeschehen zu verdecken. Der Eingang und der Lagerdurchgang bleiben sichtbar offen. Spielfigur und Kunden benutzen diese Durchgänge; geschlossene Wandabschnitte sind nicht passierbar.
-
-Die beiden Startregale und die Getränkekühlung stehen direkt in der hintersten Bodenreihe an der Rückwand. Kontakt- und Bodenschatten verbinden die Möbel optisch mit dem Raum. Beim Bauen und Verschieben ist die hinterste Reihe freigegeben; eine Vorschau an dieser Reihe trägt „AN DER RÜCKWAND“. Klicks auf den direkt darüberliegenden Wandstreifen rasten für Warenmöbel in diese Reihe ein. Freie Aufstellung im Raum bleibt möglich.
-
-Direkt an der Rückwand platzierte Warenmöbel folgen beim Ausbau der versetzten Rückwand. Frei platzierte Möbel behalten ihre Position. Bei bisherigen Kiosk-Spielständen werden unveränderte Startregale und Startkühlung einmalig an die Rückwand gestellt; selbst umgestellte Möbel werden beibehalten.
-
-Geprüft: Darstellung aller vier Ausbaustufen, Platzierung an der Rückwand, Einrasten der Vorschau, Eingang und Lagerzugang, Kundensimulation, bestehender Verschiebemodus, Spielstandmigration und Wandanschluss bei sämtlichen Ausbauten.
-
-## Korrektur: Hinter Schränke laufen
-
-Die Bewegung prüft jetzt die tatsächliche Fußfläche der Figur gegen die Standfläche der Möbel und die Raumgrenzen. Das gerundete Rasterfeld allein reicht nicht mehr als Kollisionsprüfung. Wandnahe Schränke blockieren die Fläche bis zur Rückwand; seitliches Einschieben in ihre Kanten ist ausgeschlossen. Die Tiefensortierung verwendet ebenfalls die Standfläche von Figuren und Möbeln.
-
-Warenmöbel und Pfandautomaten rasten beim Platzieren in der direkt vor der Rückwand liegenden Reihe bündig an die Rückwand ein. Entsprechende wandnahe Möbel in bisherigen Spielständen werden einmalig bündig gestellt, sofern der Platz frei ist. Bereits im Möbelbereich stehende Figuren werden beim Laden auf einen freien benachbarten Platz gesetzt. Weiter im Raum platzierte Möbel bleiben frei aufgestellt. Geld, Produktzuordnung und Warenbestände bleiben erhalten.
-
-Geprüft: die Figurposition aus dem Fehlerbild, seitliche Möbelkollision und Wandgrenzen bei dauerhaft gedrückter Bewegungstaste, freie Bedienung von vorne, Migration alter Spielstände, Wandraster und kostenloses Verschieben, Lagerzugang über alle Ausbaustufen, zehn Minuten Kundensimulation sowie wiederholtes Umstellen während laufender Kundenwege.
-
-## Handheld-Steuerung
-
-Die Bedienung ist wie bei einer tragbaren Spielkonsole angeordnet: links ein dauerhaft sichtbares Steuerkreuz mit WASD-Beschriftung, rechts die A-Taste für Interaktion und die B-Taste für Zurück/Abbrechen. Unten mittig öffnet MENÜ alle bisherigen Shop-Funktionen: Laden öffnen/schließen, Pause, Einkauf/Import, Preise, Möbelkauf/Ausbau, Verschieben, Personal, Erfolge, Verwaltung/Spielstände und Hilfe. Die bisherige obere Buttonleiste entfällt. Die Oberfläche passt in die verfügbare Bildschirmhöhe, einschließlich Hoch- und Querformat.
-
-Möbelkauf: MENÜ → Möbel kaufen → Möbel wählen. WASD, Pfeile oder das Steuerkreuz bewegen einen markierten Rastercursor samt Platzierungsvorschau. A, E, Enter oder Leertaste bestätigt den Kauf am gültigen Platz. Erst bei erfolgreicher Platzierung wird bezahlt. B oder Escape beendet den Bauauftrag kostenlos.
-
-Verschieben: MENÜ → Möbel verschieben. Mit WASD/Steuerkreuz das vorhandene Möbel wählen, A/E zum Aufnehmen drücken, den Cursor zum Ziel bewegen und erneut A/E zum Abstellen drücken. Ware und Geld bleiben unverändert. Während Bau- und Verschiebemodus pausieren Figur, Kunden und Simulation. Die bestehende Kollisions- und Laufwegprüfung bleibt aktiv. Maus/Tap-Platzierung ist zusätzlich möglich; die Koordinaten berücksichtigen die unverzerrte Darstellung des Spielfelds.
-
-Tastatur: WASD/Pfeile bewegen Figur oder Cursor. E/Enter/Leertaste entspricht A; Q öffnet das Menü; Escape bricht ab oder öffnet das Menü. Die direkten Tastenkürzel B für Möbelkauf und M für Verschieben bleiben verfügbar.
-
-Geprüft: Bau und Verschieben vollständig mit Richtungssteuerung und A/E, kostenlose Abbrüche, Ablehnung belegter Ziele, einmaliger Geldabzug, Touch-Steuerkreuz, vollständiger Funktionsumfang im Menü, Pause im Möbelmodus sowie bisherige Kollisions-, Kunden- und Speicherfunktionen.
-
-## Innenansicht, zweiteilige Kasse und vollständige Controller-Menüs
-
-Die Kamera richtet sich automatisch auf den aktuellen Innenraum aus; beim Betreten des Lagers wechselt sie auf dessen Raumgrenzen. Der Zoomregler erlaubt 60–240 % der eingepassten Ansicht. Vergrößert folgt die Kamera der Spielfigur beziehungsweise dem Möbelcursor. Zeigerkoordinaten werden durch die Kamera zurückgerechnet; Zoom beeinflusst die Simulation und Kollisionen nicht. Der Zoom wird mitgespeichert. Das Bildschirm-Steuerkreuz erscheint nur auf einem Touchtelefon (Hoch- oder Querformat); am PC werden WASD/Pfeiltasten verwendet.
-
-Die normale Kasse besteht aus zwei Feldern: Warenablage und Registrierkasse. Beide Felder gehören zum selben Möbel und besitzen gemeinsame Kollision und Verschiebung. Im Möbelmodus dreht R oder MENÜ → Kasse 90° drehen die Vorschau um 90°. Erst A übernimmt die gültige Platzierung/Drehung; B verwirft sie. Kunden stehen an der Kundenseite, Personal hinter dem Kassenfeld. Manuelles Kassieren erfordert die Rückseite. Bereits vorhandene Einzelkassen werden beim Laden an einen passenden zweifeldrigen Platz umgesetzt, ohne Geldabzug; betroffene Spielfiguren stehen danach wieder frei.
-
-Warenmöbel zeichnen ihre tatsächlich ausgelegten Artikel: Einräumen fügt sichtbare Packungen/Flaschen hinzu, Käufe entfernen sie. Ein leeres Regal oder Kühlmöbel zeigt leere Fächer und „LEER“. Die fest gezeichneten Waren des ursprünglichen Regal-Sprites werden überdeckt. Eine Wandablage im Lager visualisiert vorhandene Produktarten samt Vorratsmengen; noch nicht angenommene Lieferkartons bleiben separat sichtbar.
-
-Menüs werden mit den Richtungstasten/Steuerkreuz durchsucht, A/E aktiviert die markierte Funktion, B/Escape geht zurück. Der Dialog blockiert die A/B-Tasten nicht und benötigt keine zusätzlichen Schließen- oder Zurück-Buttons. Auswahlrahmen und automatisches Scrollen halten den aktiven Eintrag sichtbar. Auswahllisten und der Menü-Zoomregler lassen sich links/rechts ändern. Preise: Preisfeld markieren, A zum Bearbeiten, hoch/runter für ±0,05 €, links/rechts für ±0,50 €, A zum Speichern oder B zum Verwerfen. Es ist keine Texteingabe erforderlich. Maus/Tap-Bedienung bleibt zusätzlich möglich.
-
-Geprüft: Kamera und Zoom mit korrekter Zeigerzuordnung, zweifeldrige Kollision, vier Kassenorientierungen mit Kundenbetrieb, Platzierungsgrenzen, kostenlose Drehung/Abbruch, Migration alter Kassen und Spielfigurpositionen, Menüaktivierung über A/B, Preisänderungen und Rücknahme, manuelles Kassieren von der Personalseite sowie zehn simulierte Minuten mit Personal und Verkäufen. Canvas-Ansichten für Mobil/Desktop, gefüllte/leere Warenmöbel und alle Kassendrehungen wurden gerendert und visuell geprüft. Eine vollständige Browserprüfung der Menüoberfläche war in der Erstellungsumgebung nicht verfügbar.
-
-## Kompakte Kasse und Produkt-Auswahlraster
-
-Die Kasse belegt jetzt 2 × 1 Felder; die Textlabels auf dem Tresen entfallen. Warenablage und Kassenfeld bilden ein Möbel. Vier Ausrichtungen in 90°-Schritten, Verschieben, Platzierungsvorschau sowie Kunden- und Personalseite bleiben erhalten. Kassen aus Spielständen mit der bisherigen dritten Fläche werden ohne Geldabzug verkleinert und behalten Position und Drehung.
-
-Am Warenmöbel öffnet „Produkt im Auswahlraster wählen“ ein Raster mit ausschließlich passenden, freigeschalteten Produkten. Jede Kachel zeigt eine Produktabbildung, den Namen, den Lagerbestand und gegebenenfalls die bestehende Zuordnung. Auf schmalen Bildschirmen hat das Raster zwei Spalten, sonst vier. Die Richtungstasten bewegen die Auswahl räumlich im Raster. A übernimmt die Zuordnung und füllt aus dem Lager auf; B kehrt ohne Änderung zur Möbelansicht zurück. Beim Wechsel geht die alte Auslage vollständig zurück ins Lager. Das frühere Produkt-Dropdown entfällt.
-
-Geprüft: zwei belegte Kassenfelder, sämtliche Drehungen einschließlich Kundenbetrieb und manuellem Verkauf, Migration rotierter dreiteiliger Kassen, Rasterbewegung mit zwei/vier Spalten, Auswahl und Abbruch, Beschränkung auf passende freigeschaltete Produkte sowie vollständiger Erhalt von Waren und Geld beim Produktwechsel. Kassenansichten wurden gerendert und visuell geprüft; die Menübedienung wurde als Steuerungslogik geprüft.
-
-## Korrektur: Kassenbild und Papierkorb in den Ecken
-
-Die Registrierkasse wird ohne den zusätzlichen Unterschrank aus dem früheren Bildausschnitt direkt auf einer durchgehenden 2×1-Tischplatte gezeichnet. Monitor, Tastatur und Kassenlade folgen der Ausrichtung. Die Darstellung ist für 0°, 90°, 180° und 270° geprüft; die physische Zweifeld-Fläche bleibt unverändert.
-
-Eine feste Zeilengrenze ließ die Möbelsteuerung bisher eine Reihe vor der unteren Wand enden. Der Cursor und die Platzierungsprüfung verwenden jetzt die tatsächlichen Raumgrenzen. Der Papierkorb lässt sich damit in alle vier freien Raumecken stellen. Der zweifeldrige Eingang bleibt ausdrücklich freizuhalten. Bei jeder Möbelplatzierung werden jetzt sowohl Kunden- als auch Bedienseite sämtlicher Kassen geprüft. Ablehnungen nennen den konkreten Grund, etwa belegtes Feld, blockierter Eingang oder blockierter Bedienplatz.
-
-Geprüft: Papierkorb per A/D-Pad in allen vier Ecken platzieren und erreichen, kein Geldabzug beim Verschieben, unterste Reihe mit dem Steuerkreuz erreichen, Sperre von Eingang und Kassenbedienplatz, sämtliche Kassendrehungen mit Kundenbetrieb, Produkt-Auswahlraster und Bestandsübernahme. Kassenansichten aller vier Richtungen wurden gerendert und visuell geprüft.
-
-Die dauerhaft gespeicherten Logik-Regressionstests lassen sich mit `node tests/smoke.cjs` ausführen. Sie benötigen keine zusätzlichen Pakete; sie ersetzen keinen vollständigen Browsertest.
-
-## Kassenseiten, vollständige Drehung und Bezahl-Minispiel
-
-Die gesamte Kassengrafik einschließlich Tischplatte und Unterschrank dreht jetzt als eine Einheit. Zuvor blieb die sichtbare Unterschrankfront trotz veränderter Grundfläche nach unten ausgerichtet. Der erste Kunde steht direkt gegenüber dem Bedienplatz am Kassenfeld. Weitere Kunden erhalten getrennte Plätze ausschließlich auf der Kundenseite. Die Schlange rückt nach dem Verkauf oder Weggehen des ersten Kunden nach. Es wird immer der erste wartende Kunde bedient; später angekommene Kunden können ihn nicht überspringen.
-
-A an einer nicht bedienbaren oder unbesetzten Kasse öffnet deren Ausrichtung und die Aktionen „Gesamte Kasse 90° drehen“ und „Kasse verschieben“. Das Vorschau-Hinweisfeld nennt Bedien- und Kundenseite. Seitliches Aufstellen ist mit 90° oder 270° möglich. Grafik, Kollision, Kundenplatz und Personalplatz verwenden dieselbe Drehung. Manuell wird am eigentlichen Bedienplatz kassiert.
-
-Beim manuellen Verkauf startet das Bezahlspiel. Zuerst werden alle Artikel mit A/E gescannt, während ein Zeiger den grünen Bereich durchläuft. Danach folgt je nach Kunde:
-
-- Bargeld: Münzen direkt antippen oder mit links/rechts auswählen und mit A hinzufügen. Sobald das Rückgeld stimmt, bestätigt ein weiterer Druck auf A die Zahlung. Hoch/runter ist zum Weiterkommen nicht erforderlich; runter kann optional eine Münze entfernen. „Leeren“ und „Ausgeben“ sind zusätzlich direkt antippbar. Soll- und Ist-Rückgeld sind sichtbar; geprüft wird in ganzen Cent.
-- EC/Karte: Ein grüner Timing-Treffer autorisiert den gesamten Einkauf, unabhängig von der Artikelzahl.
-
-Erst die vollständig erfolgreiche Zahlung schreibt den Verkauf gut. Fehlversuche erlauben erneutes Probieren. B/Escape oder ein Menüwechsel bricht ohne Abbuchung ab; der Kunde wartet weiter. Das Spielgeschehen pausiert währenddessen, während das Minispiel läuft. Bei verdecktem Browserfenster pausiert auch dessen Zeiger. Kassenpersonal und SB-Kassen verkaufen weiterhin automatisch.
-
-Die Regressionstests decken die gegenüberliegenden Plätze in allen vier Ausrichtungen, getrennte Warteschlangen und Nachrücken, vollständige Bar-/EC-Abläufe, falsches Rückgeld, Timing-Fehler, Abbruch, doppelte Eingaben sowie den Schutz vor vorzeitiger Gutschrift ab. Alle Kassenausrichtungen wurden erneut als Canvas-Grafiken gerendert und visuell geprüft. Die vollständige Browserprüfung der Minispieloberfläche steht weiterhin aus.
-
-## Kassenausrichtung, Personal und Preiseinstellung
-
-Der Mitarbeitende steht hinter der Kasse auf der Seite der Tastatur. Der Kunde steht direkt gegenüber auf der anderen langen Seite des Tresens, am selben Kassenfeld. Niemand steht zum Bezahlen am kurzen Ablage- oder Kassenende. Bei 0° steht das Personal unten und der Kunde oben; bei 90° Personal links, Kunde rechts; bei 180° Personal oben, Kunde unten; bei 270° Personal rechts, Kunde links. Bildschirm, Tastatur, Tresen, Bedienplatz und Kundenplatz drehen gemeinsam. Die Tastatur zeigt zum Bedienplatz. Dieselbe Richtungsfunktion steuert Grafik, Interaktion, Personal, Warteschlange und Platzierungsprüfung. Angestellte bleiben an der zugewiesenen Kasse und wechseln nach deren Drehung den Bedienplatz. Beim Nachrücken erreichen Kunden zuerst die nächste Feldmitte, damit neu geplante Wege keine Möbelecken schneiden.
-
-Preise sind unter **MENÜ → Preise einstellen** erreichbar. Einen Verkaufspreis antippen oder mit den Richtungen auswählen und mit A bearbeiten. Hoch/runter verändert um 0,05 €, links/rechts um 0,50 €. A speichert, B verwirft. Die Touch-Auswahl aktiviert das tatsächlich angetippte Produkt. Am Regal führt „Verkaufspreis einstellen“ direkt zum zugehörigen Preis.
-
-Der Münzcursor wechselt mit links/rechts ausschließlich zwischen Münzen. A fügt die gewählte Münze hinzu und wird bei passendem Rückgeld zu „Bezahlen“. Ein weiterer Druck schließt ab, ohne zuerst „Ausgeben“ anwählen zu müssen. Münzfelder können direkt angetippt werden. Soll- und Ist-Rückgeld sind sichtbar.
-
-Prüfung: `node tests/smoke.cjs`. Die Tests umfassen alle Ausrichtungen und Laufwege, manuelle und automatische Verkäufe, die Mitarbeiterzuordnung, direkte Preiswahl, den Regalzugang zur Preiseinstellung und Bar-/EC-Abläufe. Die Kasse wurde in allen Ausrichtungen als Canvas-Grafik gerendert. Eine vollständige Prüfung auf einem echten Mobilbrowser steht noch aus.
-
-## Kassen-Numpad und markierter Bedienplatz
-
-E auf der Tastatur oder die runde A-Taste am markierten Bedienplatz öffnet bei einem zahlungsbereiten Barkunden direkt das visuelle Kassenmenü. Das Timing-Scannen ist dafür keine Voraussetzung mehr. Der Einkauf und der vom Kunden gegebene Betrag sind sichtbar. Den erhaltenen Betrag mit Ziffern und Dezimalkomma eingeben und mit **BAR** starten. Anschließend das angezeigte Rückgeld eingeben und mit **Auszahlen** bestätigen. Tastaturziffern, Punkt/Komma, Backspace, Delete und Enter funktionieren ebenso wie Touch und Steuerkreuz mit A. C leert die Eingabe. Optional kann auf die bisherige Münzauswahl gewechselt werden. Falsche Beträge schreiben keinen Umsatz gut; Abbruch erhält Geld und wartenden Kunden. Auch passende Barzahlung ohne Rückgeld ist möglich.
-
-Ein blaugrünes Fußsymbol mit Pfeil markiert das freie Bedienfeld hinter jeder Kasse und dreht beim Möbel mit. Am markierten Feld hat die Kasseninteraktion Vorrang vor nahen Möbeln und Schmutz. Die Kündigung über `fireStaff` entfernt beim letzten Mitarbeitenden dessen Laufzeitfigur und Animationsdaten und speichert die Änderung. Manuelles Kassieren nach Kündigung ist durch einen vollständigen Barverkauf getestet.
-
-Die Regressionstests prüfen zusätzlich Eingaben, falsche Kundensummen, Rückgeld, einmalige Gutschrift, Numpadnavigation, Löschen, Münzwechsel, Abbruch und Bedienplatzmarkierungen in allen vier Drehungen. Eine visuelle Prüfung im echten Mobilbrowser steht noch aus.
-
-## Zuverlässiger Auslöser des Kassenmenüs
-
-Eine frühe Interaktion während des Kundenwegs öffnet nicht mehr das Möbelmenü: Der Wunsch wird vorgemerkt, der Kunde läuft weiter und nach seiner Ankunft öffnet sich die Zahlung. Wer den Bedienplatz verlässt, hebt diese Vormerkung auf. Während der Spieler am Bedienplatz steht oder eine Interaktion vorgemerkt hat, übernimmt angestelltes Personal diesen Verkauf nicht automatisch. Im Kassen-Auswahlfenster gibt es außerdem „Kassenmenü öffnen“ und eine verständliche Meldung, wenn noch kein Kunde wartet. In einem noch laufenden Scan-Fenster kann ein Barkunde über „BAR · Kassen-Numpad öffnen“ direkt zur Zahlung wechseln. Auf dem PC ist E die Interaktionstaste; die runde A-Taste funktioniert per Klick/Touch.
-
-Zusätzliche Tests bilden die tatsächliche Interaktion am Bedienplatz, vorzeitiges A bei anlaufendem Kunden mit angestelltem Kassierer sowie die leere Kasse ab. Die vollständige Browserprüfung steht weiterhin aus.
-
-## Kassenfenster 18.10.4 – Öffnen ohne stille Blockaden
-
-Am Bedienplatz öffnet E bzw. die runde A-Taste das Kassenfenster auch bei pausiertem Spiel oder laufender Spieleranimation. Ist der Kunde noch nicht bereit, bleibt ein sichtbares Fenster „Kasse bereit“ offen. Ausschließlich dieses Wartefenster lässt die Simulation weiterlaufen; andere Menüs und aktive Bezahlspiele pausieren sie weiterhin. Bei Pause bietet das Wartefenster eine Fortsetzen-Aktion. Sobald der erste Kunde vor der Kasse steht, beginnt die Zahlung. B oder Schließen verwirft den Warteauftrag synchron.
-
-Ein verspätetes natives Dialog-close-Ereignis darf den Zahlungszustand nicht löschen, wenn das Dialogfenster inzwischen bereits wieder geöffnet wurde. Diese Reihenfolge wird separat geprüft. Ein bereits am Kundenplatz stehender Kunde gilt unabhängig von verbliebenen Wegpunkten als angekommen. 39 Regressionstests umfassen diese Fälle; eine Prüfung im Browser des Nutzers ist noch offen. Die Menüüberschrift zeigt „18.10.4“, damit eine alte geladene Version erkennbar ist.
-
-## Bezahlung vereinfacht · 18.10.5
-
-Aktueller Ablauf ersetzt die früher beschriebenen Scan- und Bargeldannahme-Schritte:
-
-- **Bargeld:** Einkauf, erhaltenes Bargeld und benötigtes Rückgeld werden angezeigt. Ausschließlich den Wechselbetrag im Numpad eingeben und „Auszahlen“ bzw. Enter/A bestätigen. Kein Abtippen des erhaltenen Betrags und keine vorgeschaltete BAR-Bestätigung. Auch bei mehreren Artikeln bleibt es eine Eingabe. Passend gezahlte Käufe werden mit 0 € Wechselgeld bestätigt.
-- **Karte:** Die Leiste erscheint direkt für den gesamten Warenkorb. Ein einziger Treffer im grünen Bereich bezahlt alle Produkte gemeinsam. Es gibt weder Einzelprodukt-Scans noch eine zweite Kartenfreigabe. Ein Fehlversuch lässt denselben Einkauf offen.
-
-Die 39 Regressionstests prüfen insbesondere Mehrprodukt-Einkäufe, einmalige Gutschrift, Fehlversuche, Abbruch, direkte Rückgeldeingabe und die bisherigen Kasseninteraktionen. Menüüberschrift: „18.10.5“. Die Prüfung im realen Browser steht weiterhin aus.
-
-## Besen aus dem Lager · 18.10.6
-
-Bodenschmutz kann der Spieler nur mit dem Besen aufwischen. Die Halterung steht sichtbar oben rechts im Lager und folgt dessen Ausbau. In Reichweite nimmt E bzw. die runde A-Taste den Besen mit; dieselbe Interaktion an der Halterung legt ihn wieder zurück. Solange der Besen getragen wird, zeigt die Figur ihn und die HUD-Hinweise wechseln zu Aufwischen bzw. Ablegen. Der Besen bleibt nach dem Putzen in der Hand und muss ausdrücklich zurückgelegt werden.
-
-Mit Besen hat Aufwischen Vorrang, auch am Kassen-Bedienplatz. Kassieren und normale Warenaktionen sind erst nach der Rückgabe wieder möglich. Ohne Besen entfernt weder die normale Interaktion noch der Mülleimer Bodenschmutz. Angestellte Reinigungskräfte arbeiten weiterhin automatisch. Der Status wird mitgespeichert; alte Spielstände ohne dieses Feld erhalten den Besen in der Halterung. Die Halterung beeinträchtigt Lieferungen nicht.
-
-43 Regressionstests umfassen das Abholen, Putzen direkt an einer besetzten Kasse, verweigertes Kassieren während des Tragens, ausdrückliche Rückgabe, anschließenden Kassenbetrieb, Schutz vor Putzen ohne Besen, alte Speicherstände und den Lagerausbau. Die Prüfung der Darstellung im echten Browser steht weiterhin aus.
+```text
+node tests/smoke.cjs
+node tests/career.cjs
+node tests/atlas.cjs
+```
+
+Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüfgruppen zu Kassen, Besen, Platzierung, Warenbestand, Aufträgen, Rängen, Lieferanten, Sonderbestellungen, Upgrades, Ereignissen und Speicherung. Simulationsläufe decken mehrere Spieltage und automatische Verkäufe ab. Raumansichten wurden über die tatsächlichen Canvas-Zeichenbefehle in PNGs gerendert und visuell geprüft. Drei zusätzliche Atlas-Prüfgruppen kontrollieren die eingebettete PNG, sämtliche Ausschnitte und den aktivierten Sprite-Renderer. Das Sprite-Sheet wurde in Raumansichten visuell geprüft. Eine vollständige Prüfung im echten Browser steht noch aus.
