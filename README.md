@@ -1,8 +1,47 @@
-# Pokermart 2.1.1
+# Pokermart 2.2
 
 Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
 
-## Version 2.1.1 – Kunden-Assets
+## Version 2.2 – Kunden, Kasse, Beschilderung und Wirtschaft
+
+**20 neue Kundendesigns:** Insgesamt 28 eigenständige Figuren mit 112 Richtungsbildern. Alle Ausgangsbilder sind 128 Pixel hoch. Neue Besucher wählen aus allen 28 Designs; bekannte Kundenprofile kehren bevorzugt mit einem festen Design zurück. Frisur und Kleidung bleiben während des gesamten Einkaufs gleich.
+
+**Barzahlung:** Das auszuzahlende Rückgeld steht groß und mittig mit einem Pixel-Münzsymbol. Einkaufssumme und gegebener Betrag stehen darüber, die eigene Eingabe gesondert darunter. Weiterhin nur den Rückgeldbetrag eingeben und einmal auszahlen; Kartenzahlung bleibt ein Treffer pro Warenkorb.
+
+**Produktbilder:** Regale, Kühlmöbel und Gefriertruhen tragen ein Produktschild mit Bild und kurzer Bezeichnung. Das Schild bleibt bei leerer Auslage sichtbar. Zehn neue Bilder entsprechen den tatsächlichen Grundprodukten und erscheinen auch im Preis- und Einkaufsmenü. Produkte behalten ihr Seitenverhältnis.
+
+### Neue Wirtschaft
+
+Die Preisempfehlungen, Preisakzeptanz, Warenkörbe, Besucherzahl und Kosten sind aufeinander abgestimmt. Grundsortiment (EK-Richtwert / empfohlener VK pro Stück):
+
+| Produkt | EK | VK |
+| --- | ---: | ---: |
+| Mineralwasser | 0,60 € | 1,90 € |
+| Apfelsaft | 1,00 € | 3,20 € |
+| Cola | 0,90 € | 2,90 € |
+| Milch | 1,10 € | 3,00 € |
+| Brot | 1,20 € | 3,90 € |
+| Reis | 0,85 € | 2,90 € |
+| Nudeln | 0,75 € | 2,60 € |
+| Chips | 1,05 € | 3,50 € |
+| Vanilleeis | 1,40 € | 4,50 € |
+| Tiefkühlpizza | 1,80 € | 5,90 € |
+
+Varianten skalieren beide Preise um 12 % pro Variantenstufe. Lieferantenrabatte gelten weiter. Empfehlungen werden von allen Profilen bei normalem Bestand akzeptiert; deutlich überhöhte Preise bleiben ablehnbar.
+
+Kunden wünschen normalerweise 3–5 Artikel, nehmen 1–2 Stück je Regalbesuch und verlassen den Einkauf seltener vorzeitig. Der Grundeinlass erfolgt alle fünf Sekunden, verändert durch Ereignisse, Ruf, Sicherheit und Ladengröße. Gleichzeitig können 7 / 11 / 16 / 22 Kunden unterwegs sein.
+
+Löhne je vollständig geöffnetem Spieltag: Kasse 22 €, Lager 20 €, Reinigung 14 €, Sicherheit 18 €. Geschlossene Zeit verursacht keine Löhne. Grundbetrieb: 6 / 10 / 16 / 24 € plus Kühlung, Tiefkühlung und SB-Kassen; geschlossen bleibt 30 % Standby-Betrieb. Ausbauten kosten 1.400 / 3.200 / 6.200 €. Rangvoraussetzungen bleiben erhalten. Neue Spiele erhalten mehr Anfangsvorrat bei weiterhin 2.600 € Startgeld.
+
+**Management:** Tagesumsatz, Wareneinsatz nach EK-Richtwert, laufende Kosten, Gewinn und Handelsgeldfluss werden getrennt angezeigt. Ein 14-Tage-Verlauf bleibt im Spielstand. Wareneinkäufe werden sofort bezahlt; Wareneinsatz dient zur Gewinnanzeige und wird nicht erneut von der Kasse abgezogen. Möbel, Ausbau und Belohnungen gehören nicht zum Handelsgeldfluss.
+
+Unbezahlte Ware abgebrochener Einkäufe kehrt einmalig ins Lager zurück. Gestohlene Ware zählt als Warenschwund. Bisheriges Kapital und Inventar bleiben erhalten. Nur erkannte alte Standardpreise werden migriert; selbst gesetzte Preise bleiben stehen. Im Preismenü lassen sich Empfehlungen ausdrücklich per Button übernehmen.
+
+### Balancing-Nachweis
+
+Sechs deterministische Kampagnen mit insgesamt 15 Spieltagen decken alle vier Ladenstufen ab. Jeder Lauf beginnt mit leeren Auslagen und ohne Vorrat; alle Lieferungen werden bezahlt. Kassen-, Lager- und Reinigungspersonal werden eingestellt und regulär bezahlt. Keine Auftragsbelohnungen werden abgeholt. Alle Kampagnen erzielen positive operative Gewinne und stimmen mit dem tatsächlichen Geldfluss überein. Die drei Kiosk-Läufe gewinnen über drei Tage 417,03 / 639,19 / 418,85 € gegenüber der Kasse nach Einstellungskosten. Die Resultate sind Testfälle und keine garantierten Erträge bei beliebiger Spielweise.
+
+## Frühere Version 2.1.1 – Kunden-Assets
 
 Acht eigenständige Kundendesigns mit verschiedenen Frisuren, Kleidungsstücken, Altersgruppen und Hauttönen besitzen jeweils echte Ansichten von vorn, hinten, links und rechts. Die 32 Ausgangs-Sprites sind 128 Pixel hoch. Jedes der 20 Kundenprofile bleibt fest einem Design zugeordnet; Farbe und Aussehen wechseln beim Richtungswechsel nicht. Bewegung nutzt dieselben Zeichenmaße und Fußpositionen wie der Verkäufer. Kunden mit Waren im Korb tragen einen sichtbaren Einkaufskorb. Grafik und Profilzuordnung ändern keine Waren, Preise oder Spielstände.
 
@@ -57,6 +96,7 @@ node tests/career.cjs
 node tests/atlas.cjs
 node tests/premium.cjs
 node tests/customers.cjs
+node tests/balance.cjs
 ```
 
 Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüfgruppen zu Kassen, Besen, Platzierung, Warenbestand, Aufträgen, Rängen, Lieferanten, Sonderbestellungen, Upgrades, Ereignissen und Speicherung. Simulationsläufe decken mehrere Spieltage und automatische Verkäufe ab. Raumansichten wurden über die tatsächlichen Canvas-Zeichenbefehle in PNGs gerendert und visuell geprüft. Drei zusätzliche Atlas-Prüfgruppen kontrollieren die eingebettete PNG, sämtliche Ausschnitte und den aktivierten Sprite-Renderer. Das Sprite-Sheet wurde in Raumansichten visuell geprüft. Eine vollständige Prüfung im echten Browser steht noch aus.
@@ -64,3 +104,5 @@ Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüf
 Drei zusätzliche Prüfgruppen für Version 2.1 prüfen sämtliche 29 neuen Ausschnitte, Richtungsbilder, den Szenenpuffer in doppelter Auflösung, leere Auslagen und den Besen. Zusammen mit den bisherigen Prüfungen bestehen 58 unterschiedliche Prüfgruppen. Native Ansichten von Laden, Lager und allen vier Kassenausrichtungen wurden visuell geprüft; ein vollständiger Browsertest steht aus.
 
 Version 2.1.1 ergänzt drei Prüfgruppen: Vollständigkeit und Grenzen aller 32 Kunden-Sprites, feste Profilzuordnung und Richtungswechsel sowie Darstellung einer gemischten Kundengruppe ohne Spielstandänderung. Insgesamt bestehen 61 unterschiedliche Prüfgruppen. Alle acht Figuren wurden im Laden und an der gedrehten Kasse visuell geprüft. Ein vollständiger Browsertest steht weiterhin aus.
+
+Version 2.2: 68 unterschiedliche Prüfgruppen bestanden. Neue Prüfungen decken Preisakzeptanz, Migration, Kosten und Tagesabschluss, Warenrückgabe, Schwund, die große Rückgeldanzeige, korrekte Produktbilder und die Kampagnen mit bezahltem Warenbestand ab. Kunden und beschilderte Räume wurden über native Canvas-Zeichenbefehle visuell geprüft. Ein vollständiger Browsertest steht aus.
