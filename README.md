@@ -1,10 +1,10 @@
-# Pokermart 2.0 — Entwicklungsstand
+# Pokermart 2.0
 
 Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
 
-## Status dieses Entwurfs
+## Version 2.0
 
-Die Fortschrittssysteme und die überarbeitete Raumdarstellung sind implementiert und automatisiert geprüft. Die vom Nutzer zuletzt gewünschte Supermarkt-Grafik liegt bislang nur als eingeblendete Bildvorschau vor. Ihre tatsächliche PNG-Datei muss noch bereitgestellt werden. Der Ausschnittplan für das 1024×576-Sheet und die Einbindung sind vorbereitet, aber die neuen Originalgrafiken sind **noch nicht angewendet oder visuell geprüft**. Bis dahin bleibt diese Version ein Entwurf; sie ersetzt nicht die laufende GitHub-Pages-Version.
+Das Spiel verwendet das vom Nutzer bereitgestellte Supermarkt-Sprite-Sheet. Die Originaldatei wurde ohne Neuzeichnung in 77 Ausschnitte für Figuren, Möbel, Produkte, Lager, Umgebung und Emotes zerlegt. Schwarze Hintergrundflächen wurden am Rand transparent freigestellt. Ein gepackter PNG-Atlas mit 30 Kundenansichten ist direkt in der HTML eingebettet; alle Ausschnittgrenzen werden beim Laden geprüft. Das Spiel benötigt keine zusätzlichen Bilddateien oder Netzwerkzugriffe.
 
 ## Spielen
 
@@ -31,7 +31,7 @@ Die Fortschrittssysteme und die überarbeitete Raumdarstellung sind implementier
 
 Die Darstellung läuft über einen gemeinsamen, anschließend ohne Glättung skalierten Szenenpuffer. Lagerregale, Lieferannahme und kleine Besenhalterung ersetzen die übergroßen Raumtexte. Hinweise und genaue Mengen erscheinen in Reichweite bzw. im Lagerbestandsmenü. Lagerregale besitzen tatsächliche Kollision; Besen und Annahme bleiben erreichbar.
 
-Die Ausschnittdaten für das gewünschte neue Sprite-Sheet sind in `SUPERMARKET_CROPS` vorbereitet. Die PNG-Daten werden nach Bereitstellung in `SUPERMARKET_ATLAS_SOURCE` eingebettet. Der automatische Sheet-Test prüft Größe und Seitenverhältnis, anschließend müssen die Ausschnitte am Original visuell kontrolliert werden. Die im Entwurf enthaltenen Pixel-Ersatzgrafiken sind kein Ersatz für diesen noch offenen Assetwechsel.
+Die Sprites bleiben ohne Weichzeichnung. Die gesamte 2×1-Kasse dreht mit ihrer Tastatur, dem Mitarbeiterplatz und dem gegenüberliegenden Kundenplatz. Sichtbare Produkte in Verkaufs- und Lagerregalen entsprechen dem Bestand; leere Auslagen sind leer. Kleine Handwerkszeuge werden passend zur Figur dargestellt.
 
 ## Spielstände
 
@@ -42,6 +42,7 @@ Der bisherige lokale Speicherschlüssel `pokermart-v1` bleibt bestehen. Alte Spi
 ```text
 node tests/smoke.cjs
 node tests/career.cjs
+node tests/atlas.cjs
 ```
 
-Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüfgruppen zu Kassen, Besen, Platzierung, Warenbestand, Aufträgen, Rängen, Lieferanten, Sonderbestellungen, Upgrades, Ereignissen und Speicherung. Simulationsläufe decken mehrere Spieltage und automatische Verkäufe ab. Raumansichten wurden über die tatsächlichen Canvas-Zeichenbefehle in PNGs gerendert und visuell geprüft. Das ersetzt keine vollständige Browserprüfung; diese sowie die Prüfung des neuen Sprite-Sheets stehen noch aus.
+Die zweite Datei führt zusätzlich die bisherigen Tests aus: insgesamt 52 Prüfgruppen zu Kassen, Besen, Platzierung, Warenbestand, Aufträgen, Rängen, Lieferanten, Sonderbestellungen, Upgrades, Ereignissen und Speicherung. Simulationsläufe decken mehrere Spieltage und automatische Verkäufe ab. Raumansichten wurden über die tatsächlichen Canvas-Zeichenbefehle in PNGs gerendert und visuell geprüft. Drei zusätzliche Atlas-Prüfgruppen kontrollieren die eingebettete PNG, sämtliche Ausschnitte und den aktivierten Sprite-Renderer. Das Sprite-Sheet wurde in Raumansichten visuell geprüft. Eine vollständige Prüfung im echten Browser steht noch aus.
