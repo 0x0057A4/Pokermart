@@ -1,8 +1,12 @@
-# Pokermart 2.0
+# Pokermart 2.0.1
 
 Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
 
-## Version 2.0
+## Version 2.0.1 – Grafikpflege
+
+Saubere Fliesen und einheitliche Wandmaterialien ersetzen die vergrößerten Bodenfugen. Figuren werden proportional und kleiner dargestellt. Verkaufsregale erhalten dunkle Rückwände, gleichmäßig verteilte Waren und Preisleisten. Der Tresen behält beim Drehen seine aufrechte Perspektive; Tastatur sowie Kunden- und Mitarbeiterseite folgen seiner Ausrichtung. Dezente Fußmarkierungen und kleinere Emotes halten den Blick auf das Spiel frei. Farben der Bedienoberfläche passen zu den Raummaterialien.
+
+## Sprite-Sheet
 
 Das Spiel verwendet das vom Nutzer bereitgestellte Supermarkt-Sprite-Sheet. Die Originaldatei wurde ohne Neuzeichnung in 77 Ausschnitte für Figuren, Möbel, Produkte, Lager, Umgebung und Emotes zerlegt. Schwarze Hintergrundflächen wurden am Rand transparent freigestellt. Ein gepackter PNG-Atlas mit 30 Kundenansichten ist direkt in der HTML eingebettet; alle Ausschnittgrenzen werden beim Laden geprüft. Das Spiel benötigt keine zusätzlichen Bilddateien oder Netzwerkzugriffe.
 
@@ -31,7 +35,7 @@ Das Spiel verwendet das vom Nutzer bereitgestellte Supermarkt-Sprite-Sheet. Die 
 
 Die Darstellung läuft über einen gemeinsamen, anschließend ohne Glättung skalierten Szenenpuffer. Lagerregale, Lieferannahme und kleine Besenhalterung ersetzen die übergroßen Raumtexte. Hinweise und genaue Mengen erscheinen in Reichweite bzw. im Lagerbestandsmenü. Lagerregale besitzen tatsächliche Kollision; Besen und Annahme bleiben erreichbar.
 
-Die Sprites bleiben ohne Weichzeichnung. Die gesamte 2×1-Kasse dreht mit ihrer Tastatur, dem Mitarbeiterplatz und dem gegenüberliegenden Kundenplatz. Sichtbare Produkte in Verkaufs- und Lagerregalen entsprechen dem Bestand; leere Auslagen sind leer. Kleine Handwerkszeuge werden passend zur Figur dargestellt.
+Die Sprites bleiben ohne Weichzeichnung. Die 2×1-Kasse besitzt für jede Ausrichtung einen passenden Tresenkörper. Tastatur, Mitarbeiterplatz und gegenüberliegender Kundenplatz folgen der Ausrichtung. Sichtbare Produkte in Verkaufs- und Lagerregalen entsprechen dem Bestand; leere Auslagen sind leer. Kleine Handwerkszeuge werden passend zur Figur dargestellt.
 
 ## Spielstände
 
