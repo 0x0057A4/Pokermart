@@ -1,4 +1,56 @@
-# Pokermart 2.2
+# Pokermart 3.0
+
+Deutschsprachiges Kiosk- und Supermarktspiel. GitHub Pages startet über `main/index.html`. Die zugehörigen Pixelgrafiken liegen in lokalen Dateien unter `assets/` und werden vor der Spiellogik geladen. Es gibt keine fremden Laufzeit-Abhängigkeiten. Die vollständige Einzeldatei bleibt als separate Download-Fassung verfügbar.
+
+## Backstube und Café
+
+- **Lager-Backofen (480 €):** Fester Einbau im Lager. Brötchen und Croissants in Ladungen mit 6, 12 oder 24 Stück aus bezahlten Rohlingen backen. Backenergie wird sofort berechnet. Die Ofenladung bleibt beim Speichern erhalten; Menüs pausieren die Produktion. Optional beginnt bei weniger als 24 fertigen Stück automatisch eine neue Ladung.
+- **SB-Backwarenregal (280 €):** Fertige Backwaren aus dem Lager einräumen und Brötchen oder Croissants im Produkt-Auswahlraster zuordnen. Pixel-Auslage und Produktbild zeigen das angebotene Sortiment.
+- **Kaffeemaschine (420 €):** Bis zu 24 Bohnenportionen nachfüllen. Jede Tasse braucht eine Portion, zwei Spielsekunden und 0,10 € Zubereitungskosten. Je Ausbaustufe stehen 6–12 Tassen bereit. Verkauf an der Kasse.
+- **Stehtisch (95 €):** Bezahlte Kaffee- und Backwarengäste suchen einen sauberen, freien Tisch. Nach der Pause bleiben Geschirr und Krümel zurück. Am Tisch mit Leertaste abräumen. Belegte Tische lassen sich weder verkaufen noch verschieben.
+- **Personal:** Die Lagerkraft nimmt Lieferungen an, füllt Regale und Bohnen nach. Die Reinigungskraft räumt auch Tische ab. Für manuelles Aufwischen von Bodenschmutz bleibt der Besen erforderlich.
+- **Fortschritt:** Eigene Aufträge mit Geld und Erfahrung für gebackene Ware, verkauften Kaffee und abgeräumte Tische.
+- **Grafik:** Zwölf passende Pixel-Assets für die neuen Möbel, Rohwaren, fertige Produkte und benutztes Geschirr.
+
+Alle neuen Einrichtungen kosten zusammen 1.275 € und passen bereits in den Startkiosk. Vom unveränderten Startkapital von 2.600 € bleiben 1.325 € für Ware und Betrieb übrig. Empfohlene Verkaufspreise: Brötchen 1,20 €, Croissant 1,90 €, Kaffee 2,80 €.
+
+## Automatisch nachkaufen
+
+Im jeweiligen Regal- oder Maschinenmenü einschalten. Alle zwei Spielsekunden wird der gemeinsame Bestand aus Lager, Auslagen, Bohnenreservoirs, Ofenladung und bereits bestellten beziehungsweise angelieferten Kartons geprüft. Bei niedrigem Bestand werden bezahlte Zwölfer-Kartons bestellt. Mehrere Regale erzeugen keine doppelten Bestellungen. Die globale Geldreserve beginnt bei 200 € und lässt sich in 50-€-Schritten ändern.
+
+Für Backwaren bestellt die Automatik Rohlinge, für Kaffee Bohnen. Lieferungen müssen weiterhin angenommen und die Rohwaren verarbeitet werden. Lieferantenfreigaben, Rabatte, Lieferzeiten und die Goldblatt-Beschränkung der bisherigen exklusiven Produkte gelten weiter.
+
+## Bedienung
+
+| Eingabe | Funktion |
+| --- | --- |
+| WASD / Pfeile | Figur, Möbelcursor oder räumliche Menüauswahl bewegen |
+| Leertaste / E / Enter | Interagieren, auswählen, bestätigen |
+| B / Escape | Zurück, Preisänderung verwerfen, Möbelmodus abbrechen |
+| Q / Tab | Spielmenü öffnen beziehungsweise zurück |
+| F / M / R | Möbel kaufen / verschieben / Kasse drehen |
+| I / P / C | Lager / Preise / Backstube und Café |
+| ↑ ↓ beim Bearbeiten eines Preises | ±0,05 € |
+| ← → beim Bearbeiten eines Preises | ±0,50 € |
+| Ziffern, Komma, Rücktaste an der Kasse | Rückgeld direkt eingeben |
+
+Die Auswahl folgt der sichtbaren Anordnung der Schaltflächen. Leertaste löst eine Aktion einmal aus, auch bei fokussierten HTML-Buttons. Auf Mobiltelefonen bleiben Steuerkreuz, A/B und Menü verfügbar. Barzahlung verlangt nur den Wechselbetrag; bei Karte bezahlt ein Treffer den gesamten Warenkorb.
+
+## Speicherstand
+
+Alte Spielstände mit 160 Produkten werden auf 166 Produkte erweitert. Geld, eigene Preise, Möbel und Waren bleiben erhalten; neue Zutaten starten ohne Gratisbestand. Ofenladung, Nachkauf, Reserve und Geschirr werden gespeichert. Bereits bezahlte Tischgäste erzeugen beim Speichern keine zusätzlichen Produkte. Der lokale Schlüssel bleibt `pokermart-v1`. Export und Import liegen im Management. Ohne geöffnetes Spiel vergeht keine Zeit.
+
+## Prüfen
+
+```sh
+node tests/cafe.cjs
+```
+
+Die Gesamtsuite umfasst **83 Prüfgruppen**: Kasse in allen Ausrichtungen, Kollisionen, Menüs und Preise, Speicherstände, Richtungsbilder, Fortschritt, Warenflüsse, Produktion, Nachbestellung und Tischgäste. Enthalten sind sechs bezahlte Waren-/Personal-Kampagnen über insgesamt 15 Spieltage und alle vier Ladengrößen sowie ein achtminütiger Café-Dauertest. Bild-Crops werden gegen die echten PNG-Abmessungen geprüft.
+
+---
+
+## Frühere Version 2.2
 
 Ein deutschsprachiges Kiosk- und Supermarktspiel. Das gesamte laufende Spiel steckt in genau einer `index.html`; kein Build, keine externen Skripte und kein Server erforderlich. Für GitHub Pages bleibt `main/index.html` der Einstiegspunkt.
 
@@ -106,3 +158,4 @@ Drei zusätzliche Prüfgruppen für Version 2.1 prüfen sämtliche 29 neuen Auss
 Version 2.1.1 ergänzt drei Prüfgruppen: Vollständigkeit und Grenzen aller 32 Kunden-Sprites, feste Profilzuordnung und Richtungswechsel sowie Darstellung einer gemischten Kundengruppe ohne Spielstandänderung. Insgesamt bestehen 61 unterschiedliche Prüfgruppen. Alle acht Figuren wurden im Laden und an der gedrehten Kasse visuell geprüft. Ein vollständiger Browsertest steht weiterhin aus.
 
 Version 2.2: 68 unterschiedliche Prüfgruppen bestanden. Neue Prüfungen decken Preisakzeptanz, Migration, Kosten und Tagesabschluss, Warenrückgabe, Schwund, die große Rückgeldanzeige, korrekte Produktbilder und die Kampagnen mit bezahltem Warenbestand ab. Kunden und beschilderte Räume wurden über native Canvas-Zeichenbefehle visuell geprüft. Ein vollständiger Browsertest steht aus.
+
