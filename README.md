@@ -1,6 +1,16 @@
-# HYPERMARKT 3.5
+# HYPERMARKT 3.6
 
 Deutschsprachiges Kiosk- und Supermarktspiel. GitHub Pages startet über `main/index.html`. Die zugehörigen Pixelgrafiken liegen in lokalen Dateien unter `assets/` und werden vor der Spiellogik geladen. Es gibt keine fremden Laufzeit-Abhängigkeiten. Die vollständige Einzeldatei bleibt als separate Download-Fassung verfügbar.
+
+## Kompaktes Schwerlastlager (3.6)
+
+Das Lager bleibt fest **8 × 7 Felder** groß. Neue Produkte vergrößern es nicht mehr. Drei dichte Reihen aus den vorhandenen Stahl-Schwerlastregalen bieten feste Fächer für Produktfamilien und ihre Varianten. Zwei getrennte Rohlingbehälter bleiben erhalten. Lieferannahme, Ofen und Besen sind über freie schmale Gänge erreichbar.
+
+Am Regal mit Leertaste/E die Produktfächer öffnen und daraus direkt den Bestand und die Nachbestellung wählen. Die Gesamtzahl steht am Regal; eine rote Markierung nennt die Anzahl knapper oder leerer Produktfächer. Weltgrafik und Fachübersicht lesen denselben tatsächlichen Lagerbestand. Die Gesamtübersicht über **I** bleibt verfügbar.
+
+Alte Spielstände behalten Waren, Geld, Bestellungen, Theken und Fortschritt. Wer sich beim Laden im entfernten Teil des bisherigen großen Lagers befindet, wird am neuen Annahmeplatz abgesetzt. Die Kamera zeigt bei normalem Zoom den kompakten Raum vollständig.
+
+Prüfen: `node tests/compact-warehouse.cjs`.
 
 ## Fleischtheke und Bäckerei mit Café (3.5)
 
