@@ -1,6 +1,30 @@
-# HYPERMARKT 3.3
+# HYPERMARKT 3.5
 
 Deutschsprachiges Kiosk- und Supermarktspiel. GitHub Pages startet über `main/index.html`. Die zugehörigen Pixelgrafiken liegen in lokalen Dateien unter `assets/` und werden vor der Spiellogik geladen. Es gibt keine fremden Laufzeit-Abhängigkeiten. Die vollständige Einzeldatei bleibt als separate Download-Fassung verfügbar.
+
+## Fleischtheke und Bäckerei mit Café (3.5)
+
+Im Menü **Verkaufsfläche erweitern** öffnen. Die **Fleischtheke (1.800 €)** baut die Verkaufsfläche nach links aus. **Bäckerei & Café (1.400 €)** erweitern sie nach hinten. Die Bereiche haben einen offenen Übergang; es entstehen keine getrennten Zimmer. Kollision, Kundenwege, Kameraführung und reguläres Möbelstellen berücksichtigen beide Anbauten.
+
+- Hinter der Theke am Fußsymbol mit **Leertaste/E** bedienen. Die Sprechblase zeigt Produktbilder und Mengen. Im Minispiel mit **WASD/Pfeilen** ein Produkt wählen und mit **Leertaste/E** einzeln in die Tüte legen. Mehrere gleiche oder verschiedene Artikel sind möglich. Erst die vollständige Bestellung lässt sich übergeben. Unterbrechen verbraucht keine Ware.
+- Die Kunden übernehmen die Tüte in ihren Warenkorb und bezahlen anschließend an der normalen Kasse. Übergabe selbst erzeugt keine Einnahmen. Unbezahlte Einkäufe werden beim Verlassen, Speichern oder Tagesabschluss genau einmal wieder ins Lager zurückgeführt.
+- Die Fleischtheke bietet **Rindersteak, Bratwurst, Hähnchenfilet und Kochschinken**. Ware bestellen, im Lager annehmen und über den Kühlvorrat hinter der Fleischtheke in die Auslage einräumen. Jede Sorte besitzt einen eigenen Bestand.
+- In der Bäckerei **Brötchen und Croissants** aus bezahlten Rohlingen im eigenen Ofen backen und danach in die Theke einräumen. Der vorhandene Lagerofen und die SB-Auslagen bleiben nutzbar.
+- **Kaffee, Espresso und Cappuccino** an der neuen Maschine zubereiten. Jede Tasse verbraucht Bohnen und Energie, Cappuccino zusätzlich Milch. Während der Bedienung kann die Maschine laufen; eine fertige Tasse wird anschließend einzeln ausgewählt. Ofen und Maschine funktionieren auch während der Nacharbeit.
+- Preise der neuen Artikel im normalen Preismenü einstellen. Thekenbestände, Ofenladungen und angefangene Kaffeezubereitung werden gespeichert. Bestehende Spielstände mit 160 oder 166 Produkten erhalten die neuen Artikel ohne Gratisbestand.
+
+Gesamtprüfung: `node tests/departments.cjs` enthält alle vorherigen Tests sowie Käufe, offene Laufwege auf jeder Ausbaustufe, mehrteilige Bestellungen, Kassenzahlung, Rohstoffverbrauch, Zubereitung, Migration und fortlaufende Kundenbewegung. Die neuen Weltansichten wurden anhand der tatsächlichen Canvas-Zeichenbefehle visuell geprüft; ein vollständiger Test im verbundenen Browser war nicht verfügbar.
+
+## Lager, Nacharbeit und Kassenstabilität (3.4)
+
+- **Begehbares Produktlager:** Eigene feste Plätze für alle freigeschalteten Waren, mit Produktbild, tatsächlichem Lagerbestand und Markierung für leer beziehungsweise höchstens sechs Stück. Weitere Plätze kommen mit den Produktfreigaben dazu. Die Kamera folgt durch das größere Lager; es wird nur ein Bildschirm großer Zeichenpuffer verwendet.
+- **Zwei Rohlingbehälter:** Brötchen- und Croissantrohlinge werden separat sichtbar gezählt. Bohnen und fertig hergestellte Backwaren/Kaffee haben ebenfalls eigene Plätze. Auslagen, unterwegs befindliche Ware und noch nicht angenommene Kartons zählen nicht als Lagerbestand.
+- **Direkt am Lagerregal bestellen:** Vor den Lagerplatz stellen und Leertaste/E drücken. Im Detailfenster lässt sich ein bezahlter 12er-Karton bestellen. Für hergestellte Artikel werden die passenden Rohwaren bestellt. Die Lagerübersicht über **I** bietet dieselben Wege als Kacheln.
+- **Nacharbeit nach 20 Uhr:** Der Kassenbericht erscheint weiterhin automatisch. Danach kann man bei angehaltener Uhr Lieferungen annehmen, nachbestellen, backen, einräumen und reinigen. Diese Ausgaben werden demselben Bericht zugeordnet; Löhne und Betrieb werden nur einmal abgerechnet. Zum nächsten Tag am Ladeneingang interagieren und **Tag beenden** bestätigen. Offene Lieferungen und Ofenladungen bleiben erhalten. Speichern/Laden erhält die Nacharbeitsphase.
+- **Kassenwarteschlangen:** Verschobene oder gedrehte Kassen aktualisieren die Laufwege; veraltete Kassenreferenzen werden neu zugeordnet. Ungültige Wartefenster werden geschlossen. Bar- und Kartenzahlung funktionieren nach dem Verschieben in alle vier Richtungen und nach dem Entlassen des Kassierers.
+- **Kleine Bedienungsverbesserungen:** Das bereits zugeordnete Produkt steht als erste Kachel im Regalmenü. Die grüne Einnahmenanzeige ist kleiner.
+
+Prüfen: `node tests/warehouse.cjs` führt die gesamte bisherige Testsuite und die neuen Lager-/Nacharbeits-/Kassenprüfungen aus. Zusätzlich wurden die tatsächlichen Canvas-Zeichenbefehle mit den vorhandenen Pixel-Assets visuell geprüft. Ein vollständiger Test im verbundenen Browser war in dieser Arbeitsumgebung nicht verfügbar.
 
 ## Direkt nachbestellen und gerade Backstuben-Ansichten (3.3)
 
