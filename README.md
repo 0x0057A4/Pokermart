@@ -1,8 +1,19 @@
-# Pokermart 3.0
+# Pokermart 3.1
 
 Deutschsprachiges Kiosk- und Supermarktspiel. GitHub Pages startet über `main/index.html`. Die zugehörigen Pixelgrafiken liegen in lokalen Dateien unter `assets/` und werden vor der Spiellogik geladen. Es gibt keine fremden Laufzeit-Abhängigkeiten. Die vollständige Einzeldatei bleibt als separate Download-Fassung verfügbar.
 
-## Backstube und Café
+## Drehbare Regale und Kassenbericht (3.1)
+
+- Warenregale, Getränkekühlungen, Gefriertruhen, SB-Backwarenregale und Kaffeemaschinen besitzen vier Ausrichtungen. Im Regalmenü **90° drehen** wählen oder im Möbelmodus **R** drücken, dann mit WASD/Pfeilen positionieren und mit Leertaste/A bestätigen. Kundenzugang, Platzierungsprüfung und Vorschau folgen der Ausrichtung. Bestand, Produkt, Aufwertung und Nachkauf-Einstellungen bleiben erhalten. Drehen und Verschieben kosten nichts; Abbrechen verwirft die Vorschau.
+- **Esc** schließt Regalmenü und Produktauswahl direkt. Auch das Preismenü schließt; ein noch nicht bestätigter Preis wird verworfen. **B** behält die bisherige Zurück-Navigation.
+- Abgeschlossene Verkäufe zeigen den tatsächlich kassierten Betrag als grüne **+X,XX €**-Einblendung. Gilt auch für automatische Kassen. Abbruch und wiederholtes Bestätigen erzeugen keine weitere Gutschrift.
+- Geschäftszeit ist **05:00–20:00 Uhr**. Die bisherigen vier Echtzeit-Minuten pro Spieltag bleiben erhalten; Menüs pausieren weiterhin. Um 20 Uhr stoppt der Einlass und der **Kassenbericht** erscheint. Der nächste Tag startet erst per Bestätigung wieder um 05:00 Uhr.
+- Der Bericht trennt Warenumsatz, sonstige Einnahmen, Wareneinkauf/Zubereitung, Löhne, Betrieb sowie Möbel/Ausbau/Einstellungen. Anfangsbestand, Endbestand und Kassenveränderung stimmen mit dem tatsächlichen Geld überein. Warenverbrauch dient zusätzlich zur Gewinnanzeige und wird nicht erneut bezahlt.
+- Unbezahlte Warenkörbe gehen zum Tagesende einmalig ins Lager zurück; bezahlte Café-Ware wird nicht dupliziert. Benutzte Tische bleiben schmutzig. Lieferungen und Ofenladungen pausieren bis zum nächsten Spieltag. Der Bericht und die bereits berechneten Kosten überstehen Speichern und Laden. Der letzte Bericht bleibt im Spielmenü abrufbar; bis zu 14 Abschlüsse stehen im Management.
+
+Prüfung: `node tests/operations.cjs` führt die bisherigen Integrationsprüfungen und zehn neue Prüfgruppen aus. Dazu gehören sechs bezahlte Waren-/Personal-Kampagnen, ein achtminütiger Café-Lauf, sämtliche Regalrichtungen und genaue Tagesgrenzen, Ledger-Abgleich, Migration und Wiederladen. Gedrehte, gefüllte und leere Möbel wurden zusätzlich mit den echten Canvas- und PNG-Assets gerendert und visuell geprüft. Ein vollständiger Browsertest steht aus.
+
+## Backstube und Café (3.0)
 
 - **Lager-Backofen (480 €):** Fester Einbau im Lager. Brötchen und Croissants in Ladungen mit 6, 12 oder 24 Stück aus bezahlten Rohlingen backen. Backenergie wird sofort berechnet. Die Ofenladung bleibt beim Speichern erhalten; Menüs pausieren die Produktion. Optional beginnt bei weniger als 24 fertigen Stück automatisch eine neue Ladung.
 - **SB-Backwarenregal (280 €):** Fertige Backwaren aus dem Lager einräumen und Brötchen oder Croissants im Produkt-Auswahlraster zuordnen. Pixel-Auslage und Produktbild zeigen das angebotene Sortiment.
