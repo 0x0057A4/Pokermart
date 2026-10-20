@@ -1,6 +1,14 @@
-# Pokermart 3.2
+# HYPERMARKT 3.3
 
 Deutschsprachiges Kiosk- und Supermarktspiel. GitHub Pages startet über `main/index.html`. Die zugehörigen Pixelgrafiken liegen in lokalen Dateien unter `assets/` und werden vor der Spiellogik geladen. Es gibt keine fremden Laufzeit-Abhängigkeiten. Die vollständige Einzeldatei bleibt als separate Download-Fassung verfügbar.
+
+## Direkt nachbestellen und gerade Backstuben-Ansichten (3.3)
+
+- **Nachbestellen direkt neben Auffüllen:** Ein Tastendruck bestellt einen bezahlten 12er-Karton des aktuellen Produkts. Der Preis steht auf dem Knopf. Lagerbestand, unterwegs befindliche Stücke und noch anzunehmende Lieferungen stehen direkt darunter. Bestellungen werden erst durch die Annahme im Lager verfügbar; Auffüllen bleibt ein eigener Schritt. Bei Backwaren werden die passenden Rohlinge bestellt, bei Kaffee Bohnen. Geld- und Lieferantenbeschränkungen gelten auch hier.
+- **Backwarenregal neu gezeichnet:** gerade Front, zwei echte 90°-Seitenprofile und eine geschlossene Rückansicht. Vier waagerechte Ablagen mit dynamischer Ware. Leere Regale bleiben sichtbar leer. Auch Menübilder und Lade-Fallbacks verwenden die neue Front. Der Lagerofen hat ebenfalls eine neue gerade Front; zusätzliche Ofenprofile sind im Atlas enthalten, der feste Einbauplatz im Spiel bleibt frontal.
+- **HYPERMARKT** in Seitentitel, Kopfzeile, Spielmenü, Ladenschild und Exportdateinamen. Die vorhandene GitHub-Pages-Adresse und der interne Speicherschlüssel `pokermart-v1` bleiben kompatibel; vorhandene Spielstände funktionieren weiter.
+
+Prüfung: `node tests/hypermarkt.cjs` prüft zusätzlich den kompletten manuellen Bestellweg, genaue Geldbuchungen, Rohwarenzuordnung, blockierte Käufe, Leertaste/Escape, neue Frontdarstellung und Spielstand-Kompatibilität. Die tatsächlichen Canvas-Ansichten wurden visuell geprüft. Ein vollständiger Browsertest steht aus.
 
 ## Echte Seitenprofile und Produktkacheln (3.2)
 
