@@ -69,6 +69,6 @@ const png=Buffer.from(run('FOOD_ATLAS_SOURCE').split(',')[1],'base64'),w=png.rea
 assert.equal(Object.keys(frames).length,12);
 for(const [name,[x,y,width,height]]of Object.entries(frames))assert(x>=0&&y>=0&&x+width<=w&&y+height<=h,'Food sprite out of bounds: '+name);
 run("closePanel();S=fresh();customers=[];foodArtLoaded();for(const kind of ['bakery','coffee','standing'])drawFixture({kind,x:10,y:11,pid:kind==='coffee'?163:162,qty:12,beans:12,dirty:kind==='standing'?1:0});S.food.oven.installed=true;drawStorageInventory(layout().store);for(let id=160;id<166;id++)drawPremiumProduct(id,0,0,20,20);for(const name of ['cafe','storage','products','supply'])panel(name)");
-assert(run('foodReady'));assert.equal(run('foodFrames.size'),12);
+assert(run('foodReady'));run("for(const key of Object.keys(FOOD_CROPS))gbaLegacy.foodFrame(key)");assert.equal(run('foodFrames.size'),12);
 console.log('PASS: twelve bounded sprites render cafe fixtures, food, raw ingredients and dishes');
 
