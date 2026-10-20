@@ -1,3 +1,23 @@
+# HYPERMARKT 3.3 – Backstube
+
+Mit dem eingebauten Imagegen-Werkzeug erzeugt. Originale referenzieren den vorhandenen Pixelstil. Keine perspektivische Verformung im Renderer.
+
+Produktionsdateien: `furniture-directions.png` (336 × 1008; neue Backwarenansichten und Ofenansichten) sowie `food_atlas_source-0.js` (neue Fronten für Menü und Lade-Fallback). Zuschnitt und Nearest-Neighbor-Skalierung für die Laufzeit; Produkte werden dynamisch im Spiel ergänzt. Der Backofen im Lager nutzt die Frontalansicht.
+
+## bakery – vollständiger Prompt
+
+```text
+Use case: stylized-concept. Asset type: production-ready pixel-art furniture sprite sheet for a 2D supermarket game, transparent RGBA background. Create ONE wooden self-service bakery rack as FOUR matching orthographic elevations arranged in a precise 2 by 2 grid, each isolated with generous transparent margins. Top-left: PERFECTLY STRAIGHT FRONT ELEVATION, full width, bilateral symmetry, both uprights same height and four horizontal empty bread trays. Top-right: EXACT LEFT SIDE ELEVATION (front edge facing left), narrow profile with one vertical wooden side panel and four projecting horizontal tray ends on its left. Bottom-left: STRAIGHT REAR ELEVATION showing closed wooden back. Bottom-right: EXACT RIGHT SIDE ELEVATION (front edge facing right), matching narrow profile with tray ends on the right. Input image 1 is the old game bakery screenshot, use ONLY for honey oak wood and dark blue-gray metal trim palette; its slanted geometry is WRONG and must not be copied. Input image 2 is existing game artwork, use ONLY for consistent crisp pixel technique and proportions. The new rack must be level, upright, square-on and unskewed. All boards and tray edges horizontal or vertical; straight parallel sides, rectangular silhouette. True orthographic elevations, NO visible top plane, NO adjacent face visible from front or side, NO perspective, NO diagonal receding edges, NO isometric, NO 3/4 angle, NO 45-degree angle. Four empty trays, absolutely NO food, no signs, no text, no labels, no background, no cast ground shadows, no people. Detailed sharp retro 32-bit pixel art with dark pixel outlines, restrained 4-tone material shading, warm amber timber, dark slate metal uprights and tiny silver bolts. All four views same object, same height, same four tray levels, front and back wider than sides. Keep hard pixel clusters and transparent background.
+```
+
+## oven – vollständiger Prompt
+
+```text
+Use case: stylized-concept. Asset type: transparent pixel-art bakery oven sprite sheet for a supermarket game. Use the attached old oven only as reference for its dark slate-gray commercial oven design, amber glass door, small cyan display, right-hand controls and stainless lower cabinet. Redraw it as FOUR exact orthographic elevations, isolated on transparent RGBA background, in a precise 2x2 grid: top-left perfectly straight FRONT elevation, top-right complete LEFT SIDE elevation with front edge pointing left, bottom-left straight REAR elevation, bottom-right complete RIGHT SIDE elevation with front edge pointing right. Front view symmetric rectangular cabinet, large dark amber window on left, slim control column with cyan screen on right, two storage doors below; EMPTY oven chamber, no bread or food permanently drawn. Narrow full side profiles show only a rectangular side panel and side vents, never the door face or front control face. Rear shows flat metal service panels. All four have exactly equal height, front and back same width, sides about half that width. Crisp detailed 32-bit game pixel art, dark outlined pixel clusters, 4-tone slate metal and cream steel shading, consistent with honey-wood bakery fixtures. Every surface square-on, all outline edges vertical or horizontal. NO visible top plane, NO isometric, NO perspective, NO oblique or 45-degree view, NO diagonal receding edges, NO slant, NO ground, NO cast shadow, NO labels, NO text, NO objects besides these four views. Actual transparent background.
+```
+
+---
+
 # Pokermart 3.2 – Möbelansichten
 
 `furniture-directions.png` ist ein transparenter Pixelatlas mit 15 separat gezeichneten Ansichten: Warenregal, Getränkekühlung, Gefriertruhe, SB-Backwarenregal und Kaffeemaschine jeweils von links, hinten und rechts. Die Vorderansichten bleiben im bisherigen Atlas. Die zwei Seitenansichten pro Möbel sind reine orthografische 90°-Profile, ohne sichtbare Vorderfläche und ohne nachträgliche Scherung. Der Renderer wählt den passenden Bildausschnitt; er verformt keine Vorderansicht.
