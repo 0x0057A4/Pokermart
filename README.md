@@ -1,6 +1,16 @@
-# Pokermart 3.1
+# Pokermart 3.2
 
 Deutschsprachiges Kiosk- und Supermarktspiel. GitHub Pages startet über `main/index.html`. Die zugehörigen Pixelgrafiken liegen in lokalen Dateien unter `assets/` und werden vor der Spiellogik geladen. Es gibt keine fremden Laufzeit-Abhängigkeiten. Die vollständige Einzeldatei bleibt als separate Download-Fassung verfügbar.
+
+## Echte Seitenprofile und Produktkacheln (3.2)
+
+- Zehn neue **reine 90°-Seitenprofile** und fünf Rückansichten für Warenregal, Getränkekühlung, Gefriertruhe, SB-Backwarenregal und Kaffeemaschine. Keine sichtbare Vorderfläche in den Seitenprofilen, keine perspektivische Verformung eines Frontalbildes. Die Original-Vorderansichten bleiben erhalten. Dynamische Ware sitzt nur auf sichtbar offenen Ablagekanten; leere Auslagen enthalten keine eingebrannten Produkte.
+- **Produktkacheln direkt im Regalmenü:** passendes freigeschaltetes Sortiment mit Produktbild. Unter dem Bild steht der tatsächlich verfügbare Lagerbestand, ohne Auslagen oder noch nicht angenommene Lieferungen. Die Zahl oben rechts zählt alle aktuell diesem Produkt zugeordneten Warenmöbel, einschließlich leerer Regale. Die eigene Zuordnung ist markiert. Ein Produkt lässt sich auch bei Lagerbestand null bereits zuordnen.
+- Beim Wechsel der Zuordnung kehrt die bisherige Ware ins Lager zurück. Die beiden Regalzähler und der Lagerbestand aktualisieren sich sofort. Es werden weder Waren noch Geld erzeugt. Zuordnung bleibt kostenlos, vorhandene Drehung und Aufwertung bleiben erhalten.
+- Bedienung per Maus/Touch sowie WASD/Pfeile und Leertaste. Esc schließt das Regalmenü direkt. Nachfüllen, Preise, automatischer Einkauf, Drehen, Verschieben und Verkaufen bleiben erreichbar. Mobil zeigt das Raster zwei Spalten, am Desktop vier.
+- Bilder und Produktionsprompts: [assets/furniture-directions.png](assets/furniture-directions.png) und [assets/ARTWORK.md](assets/ARTWORK.md).
+
+Prüfen: `node tests/shelf-assets.cjs`. Enthält die bisherigen 93 Prüfgruppen und zusätzliche Prüfungen für tatsächliche Lager-/Regalzähler, Warenrückgabe, wiederholte Zuordnung, alle Produktfamilien, Tastaturbedienung, 15 echte Bildausschnitte und den Renderer ohne Scherung. Die Seitenprofile wurden mit den tatsächlichen Canvas-Zeichenbefehlen im Spiel gerendert und visuell geprüft. Ein vollständiger Browsertest steht aus.
 
 ## Drehbare Regale und Kassenbericht (3.1)
 
