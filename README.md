@@ -1,4 +1,4 @@
-# HYPERMARKT 3.12
+# HYPERMARKT 3.13
 
 Über `index.html` ohne Build-Schritt spielbar. Bestehende Spielstände, Kapital, Waren, Preise, Ausbau und Personal bleiben erhalten.
 
@@ -14,6 +14,7 @@ WASD/Pfeile bewegen, E/Leertaste interagieren, M verschiebt, R dreht, Q öffnet 
 
 Prüfungen:
 
+- `node tests/tile-footprints-browser.cjs`: Kassenmaske in vier Richtungen, freie Felder, Kollision, Auswahl, Platzierung, Speichern/Neuladen, Gefriertruhe bei 90°/270°, Bar-/Kartenzahlung und zehn Minuten Verkauf im Browser.
 - `node tests/reference.cjs`: bestehende Integrationsprüfungen einschließlich Warenwirtschaft, Kassen, Produktion, Lager, Bewegung und Spielstandkompatibilität.
 - `node tests/hd-browser.cjs`: Browserprüfungen mit Playwright für Originaldatei und Pixelmaße, unveränderte Rahmenpixel, produktfreie Fächer, Füllstände und vier Ausrichtungen, Verkäuferansichten, Buttonkontraste, Smartphone/Querformat und Speichern/Neuladen. Playwright benötigt eine verfügbare Chromium-Installation; `POKERMART_BROWSER` setzt optional deren Pfad.
 - Falls die Testumgebung lokale HTTP-Verbindungen sperrt, führt `POKERMART_LOCAL_FILES=1` dieselben Browserprüfungen direkt über die lokalen Dateien aus.
@@ -24,3 +25,9 @@ Prüfungen:
 Die Rasterweite ist in beiden Richtungen um 50 % reduziert. Warenregal, Kühlung, Gefriertruhe und Bäckereiauslage belegen 2 × 1 kleine Felder, gedreht 1 × 2. Ihre tatsächliche Grundfläche bestimmt Platzierung, Kollision und Auswahl. Die frei gewordene halbe Reihe bleibt begehbar. Im Baumodus ist das feinere Raster sichtbar; die Baukarten nennen die Grundfläche. Regale schließen durch den an ihre Grundfläche angepassten Bildanker bündig an die Rückwand an.
 
 Bestehende Spielstände behalten Größe, Positionen, Waren und Kapital. Neue halbe Positionen werden auch im Lager gespeichert. Die Wegsuche nutzt das feinere Raster mit A*. Der Originalatlas bleibt unverändert. `tests/fine-grid-browser.cjs` prüft die neue Grundfläche, alle vier Richtungen, Laufgänge, halbe Positionen, Ablehnung überlappender Möbel, Speichern/Neuladen, Lager und Kassen sowie laufenden Verkauf.
+
+## 3.13: kachelscharfe Kasse und gedrehte Gefriertruhe
+
+Die Kasse belegt fünf kleine Felder: vier für das Band und eines seitlich für das Terminal. Bei 90° entspricht sie der gewünschten Form mit einer durchgehenden rechten Spalte und dem Terminal links in der zweiten Reihe. Grafik, Bauvorschau, Auswahl und Kollision verwenden dieselbe mitgedrehte Feldmaske. Die drei übrigen Felder des 2 × 4 großen Umrisses bleiben für Laufwege und passende Möbel nutzbar. Die Wegsuche kann enge freie Felder mit feineren Zwischenschritten erreichen; das Bauraster bleibt unverändert.
+
+Die Gefriertruhe füllt bei 90° und 270° sichtbar beide Felder ihrer 1 × 2 großen Grundfläche. Beide Enden lassen sich auswählen. Die Originalgrafiken bleiben unverändert; erst beim Zeichnen werden die passenden Ausschnitte skaliert. Bestehende Positionen, Ausrichtungen und Spielstände bleiben erhalten.

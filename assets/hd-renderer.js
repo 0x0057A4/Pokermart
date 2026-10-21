@@ -38,7 +38,7 @@ function hdFurnitureFrame(kind,rot=0){
 }
 function hdFixture(f,labels=true){
  const rot=((Number(f.rot)||0)%4+4)%4,frame=hdFurnitureFrame(f.kind,rot),x=OX+f.x*T,y=OY+f.y*T;
- const width=rot%2?T*.38:T-4,height=(T-4)*HD_CROPS[f.kind][3]/HD_CROPS[f.kind][2],footprint=fixtureFootprint(f),left=x+(footprint.w*T-width)/2,top=y+footprint.h*T-height-2;
+ const footprint=fixtureFootprint(f),{width,height,left,top}=hdFixtureGeometry(f);
  ctx.imageSmoothingEnabled=false;ctx.drawImage(frame,left,top,width,height);
  if(!rot){
   const qty=Math.max(0,Number(f.qty)||0),capacity=furnitureCapacity(f),limit=f.kind==='cold'?12:f.kind==='frozen'?8:15,count=Math.min(limit,Math.ceil(Math.min(1,qty/capacity)*limit));
