@@ -13,11 +13,8 @@ function warehousePlan(state=S){
  for(const rack of racks)rack.pid=rack.ids[0];const plan={key,bounds,fixtures,racks,map:new Map(racks.map(r=>[r.x+','+r.y,r]))};warehousePlans.set(state,plan);return plan;
 }
 
-function warehouseBlocked(x,y,state=S){
- const plan=warehousePlan(state),cx=x+.5,cy=y+.7,gx=Math.floor(cx),gy=Math.floor(cy);
- for(let yy=gy-1;yy<=gy+1;yy++)for(let xx=gx-1;xx<=gx+1;xx++){const f=plan.map.get(xx+','+yy);if(f&&cx+.27>f.x-.065&&cx-.27<f.x+1.065&&cy+.16>f.y+.08&&cy-.16<f.y+.93)return true;}
- return false;
-}
+function warehouseBlocked(x,y,state=S){const cx=x+.5,cy=y+.7;return warehousePlan(state).racks.some(f=>cx+.18>f.x-.065&&cx-.18<f.x+1.065&&cy+.12>f.y+.08&&cy-.12<f.y+.93);}
+
 function nearWarehouseFixture(){return warehousePlan(S).racks.filter(r=>distance(S.player,{x:r.x,y:r.y+1})<.9).sort((a,b)=>distance(S.player,{x:a.x,y:a.y+1})-distance(S.player,{x:b.x,y:b.y+1}))[0]||null;}
 
 function worldVisible(x,y,w,h){return x+w>=-camera.x/camera.scale&&x<=(cv.width-camera.x)/camera.scale&&y+h>=-camera.y/camera.scale&&y<=(cv.height-camera.y)/camera.scale;}

@@ -1,4 +1,4 @@
-# HYPERMARKT 3.11
+# HYPERMARKT 3.12
 
 Über `index.html` ohne Build-Schritt spielbar. Bestehende Spielstände, Kapital, Waren, Preise, Ausbau und Personal bleiben erhalten.
 
@@ -18,3 +18,9 @@ Prüfungen:
 - `node tests/hd-browser.cjs`: Browserprüfungen mit Playwright für Originaldatei und Pixelmaße, unveränderte Rahmenpixel, produktfreie Fächer, Füllstände und vier Ausrichtungen, Verkäuferansichten, Buttonkontraste, Smartphone/Querformat und Speichern/Neuladen. Playwright benötigt eine verfügbare Chromium-Installation; `POKERMART_BROWSER` setzt optional deren Pfad.
 - Falls die Testumgebung lokale HTTP-Verbindungen sperrt, führt `POKERMART_LOCAL_FILES=1` dieselben Browserprüfungen direkt über die lokalen Dateien aus.
 
+
+## 3.12: feines Bauraster und bündige Wandregale
+
+Die Rasterweite ist in beiden Richtungen um 50 % reduziert. Warenregal, Kühlung, Gefriertruhe und Bäckereiauslage belegen 2 × 1 kleine Felder, gedreht 1 × 2. Ihre tatsächliche Grundfläche bestimmt Platzierung, Kollision und Auswahl. Die frei gewordene halbe Reihe bleibt begehbar. Im Baumodus ist das feinere Raster sichtbar; die Baukarten nennen die Grundfläche. Regale schließen durch den an ihre Grundfläche angepassten Bildanker bündig an die Rückwand an.
+
+Bestehende Spielstände behalten Größe, Positionen, Waren und Kapital. Neue halbe Positionen werden auch im Lager gespeichert. Die Wegsuche nutzt das feinere Raster mit A*. Der Originalatlas bleibt unverändert. `tests/fine-grid-browser.cjs` prüft die neue Grundfläche, alle vier Richtungen, Laufgänge, halbe Positionen, Ablehnung überlappender Möbel, Speichern/Neuladen, Lager und Kassen sowie laufenden Verkauf.

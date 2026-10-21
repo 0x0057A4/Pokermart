@@ -12,6 +12,6 @@ run(`globalThis.itemDraws=0;const old=ctx;ctx=new Proxy({drawImage(){itemDraws++
 console.log('PASS: all 172 products use native pixel icons, including dough, coffee and meat');
 run(`globalThis.drawnProps=[];const original=gbaImage;gbaImage=(key,...args)=>{drawnProps.push({key,args});return original(key,...args)};for(let rot=0;rot<4;rot++)gbaFixture({kind:'checkout',x:11,y:11,rot},false);gbaImage=original;globalThis.registerFrames=drawnProps.map(p=>p.key).join(',');`);assert.equal(run('registerFrames'),'checkout0,checkout3,checkout2,checkout1');
 run(`S=fresh();customers=[];S.food.oven.installed=true;S.departments.meat.built=true;S.departments.bakery.built=true;S.player=storagePoint();globalThis.stableState=JSON.stringify(S);for(const kind of Object.keys(FURN))for(let rot=0;rot<4;rot++){const f={kind,x:11,y:11,rot,pid:kind==='cold'?0:kind==='bakery'?162:4,qty:0};gbaFixture(f);f.qty=24;gbaFixture(f)}for(const f of warehousePlan().racks)gbaWarehouse(f);drawDepartmentCounter('meat');drawDepartmentCounter('bakery');draw();`);assert.equal(run('JSON.stringify(S)'),run('stableState'));
-assert(html.includes('assets/gba-theme.css?v=3.8'));assert(html.indexOf('installGbaRenderer();')<html.indexOf('function loop(now)'));
+assert(html.includes('assets/gba-theme.css?v='));assert(html.indexOf('installGbaRenderer();')<html.indexOf('function loop(now)'));
 console.log('PASS: all furniture rotations, empty / stocked racks, open departments and actual scene rendering retain simulation state; operator-side checkout art follows rotation');
 

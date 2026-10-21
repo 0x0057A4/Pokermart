@@ -38,7 +38,7 @@ function hdFurnitureFrame(kind,rot=0){
 }
 function hdFixture(f,labels=true){
  const rot=((Number(f.rot)||0)%4+4)%4,frame=hdFurnitureFrame(f.kind,rot),x=OX+f.x*T,y=OY+f.y*T;
- const width=rot%2?T*.38:T-4,height=(T-4)*HD_CROPS[f.kind][3]/HD_CROPS[f.kind][2],left=x+(T-width)/2,top=y+T-height-2;
+ const width=rot%2?T*.38:T-4,height=(T-4)*HD_CROPS[f.kind][3]/HD_CROPS[f.kind][2],footprint=fixtureFootprint(f),left=x+(footprint.w*T-width)/2,top=y+footprint.h*T-height-2;
  ctx.imageSmoothingEnabled=false;ctx.drawImage(frame,left,top,width,height);
  if(!rot){
   const qty=Math.max(0,Number(f.qty)||0),capacity=furnitureCapacity(f),limit=f.kind==='cold'?12:f.kind==='frozen'?8:15,count=Math.min(limit,Math.ceil(Math.min(1,qty/capacity)*limit));
@@ -54,8 +54,8 @@ function hdFixture(f,labels=true){
   // Glass highlights remain visible over stocked cooling units.
   if(f.kind!=='shelf'&&count){ctx.save();ctx.globalAlpha*=.22;ctx.drawImage(frame,left,top,width,height);ctx.restore();}
  }
- if(labels&&FURN[f.kind]?.type&&furnitureDistance(S.player,f)<1.1){rect(x+7,y+T+1,T-14,9,'#f8f4e7');textAt(f.qty+'/'+furnitureCapacity(f),x+T/2,y+T+8,'#20364e',7);}
- if(editing()){const p=merchandiseFront(f);rect(OX+p.x*T+21,OY+p.y*T+20,4,4,PX.gold);}
+ if(labels&&FURN[f.kind]?.type&&furnitureDistance(S.player,f)<1.1){rect(x+7,y+footprint.h*T+1,T-14,9,'#f8f4e7');textAt(f.qty+'/'+furnitureCapacity(f),x+T/2,y+footprint.h*T+8,'#20364e',7);}
+ if(editing()){const p=merchandiseFront(f);rect(OX+(p.x+.5)*T-2,OY+(p.y+.7)*T-2,4,4,PX.gold);}
 }
 function hdSellerFrame(dir='down',step=0){
  const key='seller:'+dir+':'+step;if(hdFrames.has(key))return hdFrames.get(key);

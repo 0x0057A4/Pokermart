@@ -52,15 +52,15 @@ function referenceFixture(f,labels=true){
  if(hdReady&&HD_CROPS[f.kind]&&!f.warehouseKey){hdFixture(f,labels);return;}
  if(f.kind==='checkout'){referenceCheckout(f,labels);return;}
  if(!referenceReady||!REFERENCE_CROPS[f.kind]||f.warehouseKey){referencePrevious.fixture(f,labels);return;}
- const rot=((f.rot||0)%4+4)%4,x=OX+f.x*T,y=OY+f.y*T,key=f.kind==='standing'&&(f.dirty||tableOccupied(f))?'dirty':f.kind,front=referenceFrame(key),hasProfile=rot&&['shelf','cold','frozen','bakery','coffee'].includes(f.kind),frame=hasProfile?referenceRotatedFrame(f.kind,rot):front,w=hasProfile&&rot%2?T*.45:T-2,h=Math.min(T*1.85,(T-2)*front.height/front.width),left=x+(T-w)/2,top=y+T-h-2;
+ const rot=((f.rot||0)%4+4)%4,x=OX+f.x*T,y=OY+f.y*T,key=f.kind==='standing'&&(f.dirty||tableOccupied(f))?'dirty':f.kind,front=referenceFrame(key),hasProfile=rot&&['shelf','cold','frozen','bakery','coffee'].includes(f.kind),frame=hasProfile?referenceRotatedFrame(f.kind,rot):front,w=hasProfile&&rot%2?T*.45:T-2,h=Math.min(T*1.85,(T-2)*front.height/front.width),footprint=fixtureFootprint(f),left=x+(footprint.w*T-w)/2,top=y+footprint.h*T-h-2;
  ctx.imageSmoothingEnabled=false;ctx.drawImage(frame,left,top,w,h);
  if(!hasProfile&&FURN[f.kind]?.type&&['shelf','cold','frozen','bakery'].includes(f.kind)){
   const slots=Math.min(15,Math.max(0,f.qty||0)),wood=f.kind==='bakery',rows=wood?[[9,10,85,22],[9,37,85,23],[9,71,85,23]]:REFERENCE_DISPLAY_BAYS;
   for(let i=0;i<slots;i++){const row=i%3,col=Math.floor(i/3),[bx,by,bw,bh]=rows[row],sx=w/front.width,sy=h/front.height,pw=bw/5*sx,ph=(bh-2)*sy;drawProduct(f.pid,left+(bx+col*bw/5)*sx,top+(by+bh)*sy-ph-1,pw,ph);}
  }
  if(!hasProfile&&f.kind==='coffee')for(let i=0;i<Math.min(3,f.qty);i++)drawProduct(163,x+4+i*12,y+14,10,11);
- if(labels&&FURN[f.kind]?.type&&furnitureDistance(S.player,f)<1.1){rect(x+10,y+T+1,T-20,9,'#fff0cc');textAt(f.qty+'/'+furnitureCapacity(f),x+T/2,y+T+8,'#1c3155',7);}
- if(editing()&&FURN[f.kind]?.type){const p=merchandiseFront(f);rect(OX+p.x*T+21,OY+p.y*T+20,4,4,PX.gold);}
+ if(labels&&FURN[f.kind]?.type&&furnitureDistance(S.player,f)<1.1){rect(x+10,y+footprint.h*T+1,T-20,9,'#fff0cc');textAt(f.qty+'/'+furnitureCapacity(f),x+T/2,y+footprint.h*T+8,'#1c3155',7);}
+ if(editing()&&FURN[f.kind]?.type){const p=merchandiseFront(f);rect(OX+(p.x+.5)*T-2,OY+(p.y+.7)*T-2,4,4,PX.gold);}
 }
 function referenceEntrance(){if(!referenceReady)return;const x=OX+12*T,y=OY+14*T;ctx.imageSmoothingEnabled=false;ctx.drawImage(referenceAtlas,594,786,379,138,x-5,y-32,T*2+10,38);}
 function referenceCheckout(f,labels){
