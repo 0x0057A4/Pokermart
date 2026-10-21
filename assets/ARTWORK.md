@@ -1,13 +1,9 @@
-# HYPERMARKT 3.8 — neue Pixelwelt
+# HYPERMARKT 3.9 — Originalvorlage und Komposition
 
-Die beiden neuen Originalatlanten wurden mit Imagegen für dieses Spiel erzeugt, als visuelle Umsetzung des vom Nutzer bestätigten Supermarkt-Konzepts in der Ästhetik heller GBA-Rollenspiele. Sie enthalten keine übernommenen Pokémon-Sprites oder Figuren.
+Quelle: image(9).png, 1587 × 991, SHA-256 c74dc3a3a79176d9fd1c6152ed6accf74e8b2087ac7aff4d07011675ec0b33f0. Die Konzeptaufnahme wurde zuvor mit Imagegen für dieses Projekt erstellt und vom Nutzer als Zielbild vorgegeben. Sie enthält keine übernommenen Pokémon-Spielgrafiken.
 
-GBA_PROPS_SOURCE: 1536×1024 RGBA, 24 leere Möbel- / Ausstattungsbilder. GBA_PEOPLE_SOURCE: 887×1774 RGBA, acht Figuren mit je vier Richtungen. Eingebettet in gba-furniture-source-*.js und gba-people-source-*.js, damit das Spiel auch direkt aus index.html ohne Fetch / CORS startet. Die Originale liegen verlustfrei als PNG-Daten vor.
+Die unveränderten PNG-Bytes liegen in reference-source-*.js. reference-source.json hält Abmessungen, Dateigröße und Prüfsumme fest. reference-renderer.js verwendet diese Quelle direkt für Möbelfronten, Lebensmittel, Ofen, Kaffee, Pflanzen, Tische, Lagerbehälter, Theken, Eingang und Teile der Kasse. Rahmen der Kopf- und Hinweisleiste verwenden Abschnitte aus derselben Quelle. Die Bodenfarben wurden aus den freien Bodenflächen entnommen.
 
-gba-renderer.js enthält Ausschnittgrenzen, Laufzeitabtastung auf kleine Pixelrahmen, Alpha-Schwellenwert gegen weiche Ränder und Caches. Es zeichnet Kleidungspaletten, Gehposen, Waren und reine 90°-Möbelprofile in derselben Palette. Die Kassenbilder werden nach der Bedienseite gewählt; Kundenseite und Bedienplatz kommen weiterhin aus der Simulation. Menüs verwenden dieselben dynamischen Produktbilder wie die Auslagen. Der Ofen und die Bedientheken erhalten die neuen Fronten. gba-theme.css vereinheitlicht Management und Steuerung.
+Waren aus der Konzeptaufnahme sind keine echten Inventareinträge: Die Fächer werden in der Laufzeitkomposition geleert und mit dem tatsächlichen Spielbestand bestückt. Produktzuordnungen bleiben an der unteren Leiste erkennbar. Originale Vorderkanten und Materialbereiche werden für ergänzende 90°-Profile und Rückseiten wiederverwendet; diese zusätzlichen Ansichten sind Rekonstruktionen. Andere nicht gezeigte Ausstattung sowie Figuren stammen weiterhin aus den vorhandenen eigenen Atlanten, jetzt mit höherer Abtastauflösung. Ein vollständiger pixelidentischer Szenenvergleich wird damit nicht behauptet.
 
-Vorherige Atlanten bleiben ausschließlich als Lade- / Fehler-Fallback und für ältere Render-Funktionen im Projekt. Das aktive Spiel zeichnet mit dem neuen Renderer. Es werden keine externen Bildserver oder Fremdschriften benötigt.
-
-Möbel-Prompt: cohesive top-down GBA-era supermarket pixel sprite atlas, warm wood, cream shelves, navy outlines, blue steel, six columns and four rows, isolated on transparent RGBA; empty groceries / refrigerator / freezer / heavy rack / bakery / coffee, four checkout directions, meat and bakery counters, oven, clean / dirty table, bin, plant, broom holder, dough bin, carton, basket, self checkout, deposit machine and entrance.
-
-Figuren-Prompt: original small GBA-style humans for the same supermarket, four columns down/up/left/right and eight rows; red-cap owner, apron employee and six diverse adult civilian designs, strong pixel silhouettes, consistent proportions, transparent background, no Pokémon characters.
+Das Quelldokument wird nicht überschrieben. Alpha-Freistellung und Fachkomposition erfolgen auf getrennten Laufzeit-Canvasflächen. Keine externen Bildserver, Schrift-CDNs oder laufenden Bildgenerierungsdienste sind erforderlich.
