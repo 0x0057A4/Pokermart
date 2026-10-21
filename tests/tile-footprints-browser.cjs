@@ -17,19 +17,20 @@ const{chromium}=require('playwright');
      if(filled)blocked++;else{free++;const route=path(12,16,point.x,point.y);if(!route.length||route.some(p=>footBlocked(...p)))throw Error('Unused checkout cell is unreachable');}
     }
     const s=cashierCell(f),c=customerCells(f)[0];if(footBlocked(s.x,s.y)||footBlocked(...c)||!path(12,16,s.x,s.y).length||!path(12,16,...c).length)throw Error('Checkout service side blocked');
-    const image=document.createElement('canvas');image.width=800;image.height=800;const previous=ctx;ctx=image.getContext('2d');drawTileCheckout(f);ctx=previous;
-    const rgba=image.getContext('2d').getImageData(0,0,800,800).data,painted=new Map();let outside=0;
-    for(let y=0;y<800;y++)for(let x=0;x<800;x++)if(rgba[(y*800+x)*4+3]){
-     const wx=(x+.5-OX)/T,wy=(y+.5-OY)/T;if(!footprintHasCell(f,wx,wy))outside++;
-     const key=(Math.floor(wx*2)/2)+','+(Math.floor(wy*2)/2);painted.set(key,(painted.get(key)||0)+1);
-    }
-    if(outside)throw Error('Checkout art extends into unused cells');if(cells.some(c=>(painted.get(c.x+','+c.y)||0)<20))throw Error('Occupied cell has no checkout artwork');
+    // Regression: 3.13 split the original into distorted, disconnected fragments.
+    // The collision mask describes floor space; it must not crop a perspective sprite.
+    const image=document.createElement('canvas');image.width=800;image.height=800;const previous=ctx,g=image.getContext('2d'),calls=[];let clips=0;
+    ctx=new Proxy(g,{get(target,key){if(key==='drawImage')return(...args)=>{calls.push(args);target.drawImage(...args);};if(key==='clip')return(...args)=>{clips++;target.clip(...args);};const value=target[key];return typeof value==='function'?value.bind(target):value;},set(target,key,value){target[key]=value;return true;}});
+    try{drawTileCheckout(f);}finally{ctx=previous;}
+    const original=rot===0?referenceFrame('checkout'):gbaProp('checkout'+[0,3,2,1][rot]);
+    if(calls.length!==1||calls[0][0]!==original||calls[0].length!==5||clips)throw Error('Original checkout was split, cropped or masked again');
+    if(!g.getImageData(0,0,800,800).data.some((value,i)=>i%4===3&&value))throw Error('Checkout artwork missing');
     results.push({rot,blocked,free,mask:cells.map(c=>[(c.x-r.x)*2,(c.y-r.y)*2]).sort((a,b)=>a[1]-b[1]||a[0]-b[0])});
    }
    return results;
   });for(const result of masks){assert.equal(result.blocked,5);assert.equal(result.free,3);}
   assert.deepEqual(masks[1].mask,[[1,0],[0,1],[1,1],[1,2],[1,3]]);
-  console.log('PASS: the checkout matches the five-cell sketch; all four rotated masks agree with collision, selection, placement and rendered pixels');
+  console.log('PASS: all four checkout masks match collision, selection and placement; original artwork stays whole without fragment scaling or mask clipping');
   console.log('PASS: all three unused cells remain reachable; cashier and customer sides remain accessible in every rotation');
   const freezer=await page.evaluate(()=>{
    S=fresh();S.expanded=3;customers=[];const output=[];
@@ -57,7 +58,7 @@ const{chromium}=require('playwright');
    closePanel();S=fresh();customers=[];S.open=true;S.staff.cashier=1;S.staff.stocker=1;S.staff.cleaner=1;const start=performance.now();for(let i=0;i<6000;i++){update(.1);animate(.1);if(S.business.phase==='report'){continueAfterHours();const old={...S.player};S.player={x:12,y:13};nextBusinessDay();S.player=old;}for(const c of customers)if(footBlocked(c.x,c.y))throw Error('Customer collision at '+i+': '+c.x+','+c.y);}return{sales:S.sales,served:S.served,seconds:(performance.now()-start)/1000};
   });assert(trading.sales>0&&trading.served>0);console.log('PASS: ten-minute staffed simulation has sales and no collisions ('+trading.seconds.toFixed(2)+' s test time)');
   const qa=path.resolve(__dirname,'../.work/tile-footprint-qa');fs.mkdirSync(qa,{recursive:true});
-  await page.evaluate(()=>{closePanel();S=fresh();S.expanded=2;S.paused=true;customers=[];pendingCheckout=null;payment=null;S.player={x:13,y:12};S.furniture=[...Array.from({length:4},(_,rot)=>({kind:'checkout',x:6+rot*3,y:8,rot})),{kind:'frozen',x:8,y:11,rot:1,pid:8,qty:0},{kind:'frozen',x:10,y:11,rot:3,pid:8,qty:0}];$('saleIncome').classList.remove('show');$('toast').style.display='none';moveMode=true;moving=null;placing=null;hud();draw();});
+  await page.evaluate(()=>{closePanel();S=fresh();S.expanded=2;S.paused=false;customers=[];pendingCheckout=null;payment=null;S.player={x:13,y:12};S.furniture=[...Array.from({length:4},(_,rot)=>({kind:'checkout',x:6+rot*3,y:8,rot})),{kind:'frozen',x:8,y:11,rot:1,pid:8,qty:0},{kind:'frozen',x:10,y:11,rot:3,pid:8,qty:0}];$('saleIncome').classList.remove('show');$('toast').style.display='none';moveMode=true;moving=null;placing=null;hud();draw();});
   await page.screenshot({path:path.join(qa,'masks.png')});assert.deepEqual(errors,[]);console.log('PASS: original sprites render without script errors; visual comparison captured');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

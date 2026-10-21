@@ -1,4 +1,4 @@
-# HYPERMARKT 3.13
+# HYPERMARKT 3.14
 
 Über `index.html` ohne Build-Schritt spielbar. Bestehende Spielstände, Kapital, Waren, Preise, Ausbau und Personal bleiben erhalten.
 
@@ -14,7 +14,7 @@ WASD/Pfeile bewegen, E/Leertaste interagieren, M verschiebt, R dreht, Q öffnet 
 
 Prüfungen:
 
-- `node tests/tile-footprints-browser.cjs`: Kassenmaske in vier Richtungen, freie Felder, Kollision, Auswahl, Platzierung, Speichern/Neuladen, Gefriertruhe bei 90°/270°, Bar-/Kartenzahlung und zehn Minuten Verkauf im Browser.
+- `node tests/tile-footprints-browser.cjs`: Kassenmaske in vier Richtungen, zusammenhängende Originalgrafik ohne Teilskalierung oder Maskenbeschnitt, freie Felder, Kollision, Auswahl, Platzierung, Speichern/Neuladen, Gefriertruhe bei 90°/270°, Bar-/Kartenzahlung und zehn Minuten Verkauf im Browser.
 - `node tests/reference.cjs`: bestehende Integrationsprüfungen einschließlich Warenwirtschaft, Kassen, Produktion, Lager, Bewegung und Spielstandkompatibilität.
 - `node tests/hd-browser.cjs`: Browserprüfungen mit Playwright für Originaldatei und Pixelmaße, unveränderte Rahmenpixel, produktfreie Fächer, Füllstände und vier Ausrichtungen, Verkäuferansichten, Buttonkontraste, Smartphone/Querformat und Speichern/Neuladen. Playwright benötigt eine verfügbare Chromium-Installation; `POKERMART_BROWSER` setzt optional deren Pfad.
 - Falls die Testumgebung lokale HTTP-Verbindungen sperrt, führt `POKERMART_LOCAL_FILES=1` dieselben Browserprüfungen direkt über die lokalen Dateien aus.
@@ -28,6 +28,10 @@ Bestehende Spielstände behalten Größe, Positionen, Waren und Kapital. Neue ha
 
 ## 3.13: kachelscharfe Kasse und gedrehte Gefriertruhe
 
-Die Kasse belegt fünf kleine Felder: vier für das Band und eines seitlich für das Terminal. Bei 90° entspricht sie der gewünschten Form mit einer durchgehenden rechten Spalte und dem Terminal links in der zweiten Reihe. Grafik, Bauvorschau, Auswahl und Kollision verwenden dieselbe mitgedrehte Feldmaske. Die drei übrigen Felder des 2 × 4 großen Umrisses bleiben für Laufwege und passende Möbel nutzbar. Die Wegsuche kann enge freie Felder mit feineren Zwischenschritten erreichen; das Bauraster bleibt unverändert.
+Die Kasse belegt fünf kleine Felder: vier für das Band und eines seitlich für das Terminal. Bei 90° entspricht sie der gewünschten Form mit einer durchgehenden rechten Spalte und dem Terminal links in der zweiten Reihe. Bauvorschau, Auswahl und Kollision verwenden dieselbe mitgedrehte Feldmaske. Die drei übrigen Felder des 2 × 4 großen Umrisses bleiben für Laufwege und passende Möbel nutzbar. Die Wegsuche kann enge freie Felder mit feineren Zwischenschritten erreichen; das Bauraster bleibt unverändert.
 
 Die Gefriertruhe füllt bei 90° und 270° sichtbar beide Felder ihrer 1 × 2 großen Grundfläche. Beide Enden lassen sich auswählen. Die Originalgrafiken bleiben unverändert; erst beim Zeichnen werden die passenden Ausschnitte skaliert. Bestehende Positionen, Ausrichtungen und Spielstände bleiben erhalten.
+
+## 3.14: zusammenhängende Originalgrafik der Kasse
+
+Die Kasse verwendet wieder die vollständigen Richtungsbilder und die Darstellung aus 3.12. Band und Terminal werden weder getrennt skaliert noch auf einzelne Bodenfelder beschnitten. Die fünf belegten Felder aus 3.13 bleiben für Platzierung, Auswahl und Kollision erhalten. Der Browsertest sichert nun ausdrücklich ab, dass die Originalgrafik als Ganzes gezeichnet wird.

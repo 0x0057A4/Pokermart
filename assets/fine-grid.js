@@ -119,15 +119,18 @@ function drawPlacementGrid(){
 }
 function drawFurnitureOutline(f,color=PX.gold){ctx.strokeStyle=color;ctx.lineWidth=1;for(const {x,y}of fixtureTileCells(f))ctx.strokeRect(OX+x*T+1,OY+y*T+1,T/2-2,T/2-2);}
 function drawTileCheckout(f){
- const rot=f.rot||0,r=fixtureFootprint(f),cells=fixtureTileCells(f),size=T/2,vertical=rot%2,offsets=CHECKOUT_TILE_MASKS[rot];
- const mainCoordinate=[0,1,1,0][rot],belt=cells.filter((_,i)=>offsets[i][vertical?0:1]===mainCoordinate),pad=cells.find((_,i)=>offsets[i][vertical?0:1]!==mainCoordinate);
- const bx=OX+Math.min(...belt.map(c=>c.x))*T,by=OY+Math.min(...belt.map(c=>c.y))*T,bw=vertical?size:2*T,bh=vertical?2*T:size;
- const source=gbaProp('checkout'+[0,3,2,1][rot]),bodyCrops=[[0,32,245,76],[56,0,89,232],[0,28,235,74],[0,0,89,232]],padCrops=[[181,0,64,112],[0,46,78,104],[0,0,70,112],[58,46,87,106]];
- ctx.save();ctx.beginPath();for(const c of cells)ctx.rect(OX+c.x*T,OY+c.y*T,size,size);ctx.clip();ctx.imageSmoothingEnabled=false;
- if(source){
-  ctx.drawImage(source,...bodyCrops[rot],bx+1,by+1,bw-2,bh-2);
-  const crop=padCrops[rot],scale=Math.min((size-2)/crop[2],(size-2)/crop[3]),w=crop[2]*scale,h=crop[3]*scale;
-  ctx.drawImage(source,...crop,OX+pad.x*T+(size-w)/2,OY+pad.y*T+(size-h)/2,w,h);
- }else{for(const c of cells){rect(OX+c.x*T+1,OY+c.y*T+1,size-2,size-2,'#8fa4b7');rect(OX+c.x*T+3,OY+c.y*T+3,size-6,size-6,'#30465e');}}
- const customer=queueHead(f);if(customer)customer.cart.slice(0,3).forEach((id,i)=>{const cell=belt[i];drawProduct(id,OX+cell.x*T+5,OY+cell.y*T+6,size-10,size-10);});ctx.restore();
+ const rot=f.rot||0,r=fixtureFootprint(f),left=OX+r.x*T,top=OY+r.y*T,vertical=rot%2;
+ // Keep the complete original sprite. The ground mask must never cut or rebuild its artwork.
+ const source=rot===0?referenceFrame('checkout'):gbaProp('checkout'+[0,3,2,1][rot]);
+ ctx.save();ctx.imageSmoothingEnabled=false;
+ if(source&&source.width&&source.height){
+  const w=vertical?T-2:T*2-2,h=vertical?T*2-2:Math.min(T*1.9,w*source.height/source.width);
+  ctx.drawImage(source,left+1,top+(vertical?0:T-h)-2,w,h);
+ }else{
+  const w=vertical?T-2:T*2-2,h=vertical?T*2-2:T-4;
+  rect(left+1,top+T-h,w,h,'#263954');rect(left+3,top+T-h+2,w-4,h-4,'#a1b4c4');
+  rect(left+5,top+T-h+4,w-8,Math.max(7,h*.35),'#364b66');
+ }
+ const customer=queueHead(f),[dx,dy]=checkoutVector(f),p={x:f.x-dx,y:f.y-dy};
+ if(customer)customer.cart.slice(0,3).forEach((id,i)=>drawProduct(id,OX+p.x*T+8+i*8,OY+p.y*T+8,7,10));ctx.restore();
 }
