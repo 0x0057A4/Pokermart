@@ -27,3 +27,4 @@ for(const a of JSON.parse(run('JSON.stringify(assetCalls)'))){assert(a.every(Num
 console.log('PASS: all thirty filled/empty rotated fixture renders use their actual raster view without perspective transforms or state mutation');
 run("globalThis.emptyOK=true;for(const kind of ['shelf','cold','frozen','bakery','coffee'])for(const rot of [1,2,3])if(directionalStockSlots({kind,rot,qty:0}).length)emptyOK=false;globalThis.edge=directionalStockSlots({kind:'shelf',rot:1,qty:24});globalThis.opaque=directionalStockSlots({kind:'cold',rot:1,qty:24});globalThis.rear=directionalStockSlots({kind:'shelf',rot:2,qty:24})");assert(run('emptyOK'));assert.equal(run('edge.length'),4);assert.equal(run('opaque.length'),0);assert.equal(run('rear.length'),0);
 console.log('PASS: empty profiles contain no fake stock; goods appear only at exposed tray edges and never on an opaque side or back panel');
+

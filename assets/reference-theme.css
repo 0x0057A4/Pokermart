@@ -3,3 +3,4 @@ body{background:#0c1c47}.stage{margin:0 8px;border:3px solid #1c4579;background:
 @media(max-width:600px){#referenceHeader{height:52px;min-height:52px;max-height:52px}.stage{margin:0 4px}}
 
 .reference-hint{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:min(950px,calc(100% - 26px));height:52px;max-height:52px;min-height:52px;pointer-events:none;image-rendering:pixelated}
+

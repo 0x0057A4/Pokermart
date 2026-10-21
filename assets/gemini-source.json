@@ -1,0 +1,9 @@
+{
+  "file": "gemini-source.png",
+  "source": "image(20261021-054923).png",
+  "width": 1024,
+  "height": 765,
+  "bytes": 1344470,
+  "sha256": "31a4614dcedcb30650bc5f97cd9b120af50d4c5e813bbaa7e7bae0dc5119ef0b",
+  "processing": "Original PNG bytes; native-resolution runtime crops on separate canvases."
+}
