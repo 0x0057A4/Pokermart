@@ -1,0 +1,4 @@
+/* Let the canvas use its real display pixels; interpolation is decided per sprite. */
+#game{image-rendering:auto}
+.stage{border-color:#35546d;box-shadow:0 0 0 1px #8bafba}
+.worldtag,.zoom-control{background:#f8efdcf2;border-color:#55778c}

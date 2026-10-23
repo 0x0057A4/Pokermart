@@ -1,3 +1,15 @@
+# HYPERMARKT 3.15 - Grafikquellen
+
+Die neuen Atlanten wurden am 22. Oktober 2026 mit Imagegen fuer dieses Projekt erstellt. Der gewuenschte Stil orientiert sich an detaillierten Pokemon-Pixelwelten; es wurden keine Pokemon-Spielgrafiken extrahiert.
+
+- uhd-furniture.png: 1254 x 1254 Pixel. Vier Ansichten von Regal und Kuehlschrank. Die weiteren Reihen des Bogens werden nicht verwendet.
+- uhd-characters.png: 1536 x 1024 Pixel. Vier Mitarbeiteransichten und vier Gefriertruhenansichten. Randverbundener weisser Hintergrund wird auf getrennten Arbeitsflaechen entfernt.
+- uhd-renderer.js: native Ausschnitte, unverzerrte Skalierung und Bodenanker; getrennte Warenfuellung aus dem echten Bestand. Mitarbeiter bleiben in nativer Quellaufloesung, Kunden verwenden ebenfalls die vollen bisherigen Quellausschnitte. Die Kasse bleibt als zusammenhaengende Originalgrafik erhalten.
+
+UHD bezeichnet die Ausgabe in Displayaufloesung, begrenzt auf 4096 Pixel je Seite und rund 8,4 Megapixel. Die Atlanten selbst sind keine 4K-Dateien. gemini-source.png bleibt unveraendert: 1024 x 765 Pixel, SHA-256 31a4614dcedcb30650bc5f97cd9b120af50d4c5e813bbaa7e7bae0dc5119ef0b.
+
+## Vorherige Grafikstaende
+
 # HYPERMARKT 3.9 — Originalvorlage und Komposition
 
 ## 3.11: Gemini-Spritebogen und Verkäufer

@@ -1,24 +1,28 @@
-# HYPERMARKT 3.14
+# HYPERMARKT 3.15
 
-Über `index.html` ohne Build-Schritt spielbar. Bestehende Spielstände, Kapital, Waren, Preise, Ausbau und Personal bleiben erhalten.
+Ueber index.html ohne Build-Schritt spielbar. Bestehende Spielstaende, Kapital, Waren, Preise, Ausbau und Personal bleiben erhalten.
 
-Die Spielfigur trägt jetzt die blaue Verkäuferkleidung aus dem vom Nutzer gelieferten Gemini-Spritebogen. Vorder- und Rückansicht sowie das Seitenprofil werden in ihrer ursprünglichen Auflösung ausgeschnitten; die Gegenrichtung spiegelt das Seitenprofil. Auch die Schrittbewegungen verwenden Originalpixel. Eine vorherige Verkleinerung auf einen 64-Pixel-Körper entfällt für Verkäufer und Personal. Die bisherige Personalfigur dient während des Ladens als Ersatz.
+## 3.15: neue Moebel, Figuren und hochaufloesende Darstellung
 
-Warenregal, Kühlschrank und Gefriertruhe verwenden passende Rahmen desselben Spritebogens mit unverändertem Seitenverhältnis. Die Warenfächer des Regals werden getrennt geleert. Abdeckung, Pfosten, Fachböden und Sockel bleiben in Originalauflösung erhalten. Der tatsächliche Füllstand bestimmt die gezeichneten Waren; die Zeichnung bleibt auf die Fächer begrenzt. Leere Regale enthalten keine Warenreste. Geschlossene Seiten- und Rückansichten bleiben ohne aufgemalte Produkte.
+Warenregale, Kuehlschraenke und Gefriertruhen erhalten neue, detaillierte Grafik in vier Richtungen. Die Darstellung nutzt die Originalaufloesung der neuen Atlanten ohne vorherige Verkleinerung auf Mini-Sprites. Die Gefriertruhe spannt bei 90 und 270 Grad weiterhin beide kleinen Bodenfelder auf; alle Ansichten behalten ihr Seitenverhaeltnis und stehen am Fuss ihrer Grundflaeche.
 
-Die PNG unter `assets/gemini-source.png` entspricht dem gelieferten Original mit 1024 × 765 Pixeln bytegenau. `assets/gemini-source.json` dokumentiert Herkunft, Maße und SHA-256. Ausschneiden und Freistellen erfolgen auf getrennten Canvasflächen in Originalauflösung. Erst die Anzeige im Spiel skaliert die Grafik. Zusätzliche Richtungsansichten, die im Bogen fehlen, werden aus Metallflächen und Rahmenteilen ergänzt.
+Die neue blaue Mitarbeiterfigur besitzt vier Ansichten mit 537 Pixel hohen Quellausschnitten. Animationen entstehen auf 400 x 560 Pixel grossen Arbeitsflaechen. Auch Kunden verwenden ihre nativen Quellausschnitte in 156 x 204 Pixel grossen Animationsbildern. Der Boden verwendet ruhigere Farben im halben Bauraster. Echte Warenbestaende bestimmen die gezeichnete Fuellung; leere Moebel bleiben leer. Beim Laden dienen die bisherigen Grafiken als Ersatz.
 
-Menüs verwenden eine einheitliche helle Fläche mit dunkler Schrift und dunkle Hauptbuttons mit weißer Schrift. Tastaturauswahl und Fokus ändern diese Schriftkontraste nicht. Deaktivierte Buttons bleiben lesbar. Produktkacheln und Lagerkacheln sind kompakter; die Produktauswahl hat am Desktop vier und auf schmalen Displays zwei Spalten. Die Schriftart bleibt erhalten. Auffüllen und Nachbestellen behalten mindestens 44 Pixel hohe Bedienflächen.
+Das Canvas nutzt die tatsaechlichen Displaypixel, einschliesslich 3840 Pixel breiter UHD-Displays und hoher Pixeldichten auf Smartphones. Die Zeichenflaeche ist auf 4096 Pixel je Seite und rund 8,4 Megapixel begrenzt. Die neuen Quellatlanten messen 1254 x 1254 und 1536 x 1024 Pixel; UHD bezeichnet die Bildschirmausgabe, nicht eine native 4K-Aufloesung jedes Sprites.
 
-WASD/Pfeile bewegen, E/Leertaste interagieren, M verschiebt, R dreht, Q öffnet das Menü, Esc schließt oder bricht ab. Touchgeräte behalten das Steuerkreuz und die A/B-Tasten.
+Das um 50 Prozent verkleinerte Bauraster und die fuenf belegten Kassenfelder bleiben erhalten. Die Kasse wird als zusammenhaengendes Originalbild gezeichnet. Die Originaldatei assets/gemini-source.png bleibt bytegleich erhalten; Herkunft und Verarbeitung dokumentiert assets/ARTWORK.md.
 
-Prüfungen:
+WASD/Pfeile bewegen, E/Leertaste interagieren, M verschiebt, R dreht, Q oeffnet das Menue, Esc schliesst oder bricht ab. Touchgeraete behalten das Steuerkreuz und die A/B-Tasten.
 
-- `node tests/tile-footprints-browser.cjs`: Kassenmaske in vier Richtungen, zusammenhängende Originalgrafik ohne Teilskalierung oder Maskenbeschnitt, freie Felder, Kollision, Auswahl, Platzierung, Speichern/Neuladen, Gefriertruhe bei 90°/270°, Bar-/Kartenzahlung und zehn Minuten Verkauf im Browser.
-- `node tests/reference.cjs`: bestehende Integrationsprüfungen einschließlich Warenwirtschaft, Kassen, Produktion, Lager, Bewegung und Spielstandkompatibilität.
-- `node tests/hd-browser.cjs`: Browserprüfungen mit Playwright für Originaldatei und Pixelmaße, unveränderte Rahmenpixel, produktfreie Fächer, Füllstände und vier Ausrichtungen, Verkäuferansichten, Buttonkontraste, Smartphone/Querformat und Speichern/Neuladen. Playwright benötigt eine verfügbare Chromium-Installation; `POKERMART_BROWSER` setzt optional deren Pfad.
-- Falls die Testumgebung lokale HTTP-Verbindungen sperrt, führt `POKERMART_LOCAL_FILES=1` dieselben Browserprüfungen direkt über die lokalen Dateien aus.
+Pruefungen:
 
+- node tests/uhd-browser.cjs: Desktop, UHD und Smartphone mit dreifacher Pixeldichte; Seitenverhaeltnisse, Bodenanker, Transparenz, Figurenanimationen, Warenmenge, Ladeersatz und unveraenderter Spielzustand.
+- node tests/tile-footprints-browser.cjs: Kassenmasken, zusammenhaengende Originalgrafik, freie Felder, Kollision, Auswahl, Platzierung, Speichern, gedrehte Gefriertruhen, Bar-/Kartenzahlung und zehn Minuten Verkauf.
+- node tests/fine-grid-browser.cjs: halbes Bauraster, Laufwege, Lager und Platzierung.
+- node tests/hd-browser.cjs: Originaldatei, Rahmenpixel, Fuellstaende, Smartphone/Querformat, Menuekontraste und Speichern.
+- node tests/reference.cjs: bestehende Integrationspruefungen fuer Warenwirtschaft, Kassen, Produktion, Bewegung und Spielstaende.
+
+Browsertests benoetigen Playwright und Chromium. POKERMART_BROWSER setzt optional den Browserpfad. POKERMART_LOCAL_FILES=1 umgeht lokale HTTP-Verbindungen fuer die bisherigen Browsertests; der UHD-Test verwendet lokale Dateien direkt.
 
 ## 3.12: feines Bauraster und bündige Wandregale
 

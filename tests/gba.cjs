@@ -5,8 +5,8 @@ for(const [name,c]of Object.entries(JSON.parse(run('JSON.stringify(GBA_PROPS)'))
 const people=JSON.parse(run('JSON.stringify(GBA_PEOPLE_BOUNDS)'));assert.equal(people.length,32);for(const c of people)assert(c[0]>=0&&c[1]>=0&&c[0]+c[2]<=887&&c[1]+c[3]<=1774);
 console.log('PASS: both embedded handheld PNGs and every furniture / four-direction human crop have valid boundaries');
 run(`closePanel();S=fresh();customers=[];gbaImages.props=document.createElement('canvas');gbaImages.people=document.createElement('canvas');gbaReady=true;globalThis.savedState=JSON.stringify(S);for(const look of Array.from({length:30},(_,i)=>i))for(const dir of ['down','up','left','right'])for(let step=0;step<4;step++)gbaPersonFrame(look,dir,step,'customer');for(const role of ['player','staff'])for(const dir of ['down','up','left','right'])gbaPersonFrame(0,dir,0,role);`);
-assert.equal(run('JSON.stringify(S)'),run('savedState'));assert.equal(run("[...gbaFrames.keys()].filter(k=>k.startsWith('human:')).length"),488);
-assert(run('person===gbaPerson&&drawFixture===referenceFixture&&drawWarehouseFixture===gbaWarehouse&&drawDepartmentCounter===referenceCounter'));
+assert.equal(run('JSON.stringify(S)'),run('savedState'));assert.equal(run("[...uhdFrames.keys()].filter(k=>k.startsWith('person:')).length"),488);
+assert(run('uhdPrevious.person===gbaPerson&&drawFixture===referenceFixture&&drawWarehouseFixture===gbaWarehouse&&drawDepartmentCounter===referenceCounter'));
 console.log('PASS: the active renderer covers 30 civilian identities, staff, owner, four walking directions and cached stride poses without mutating saves');
 run(`globalThis.itemDraws=0;const old=ctx;ctx=new Proxy({drawImage(){itemDraws++}},{get:(o,k)=>o[k]||(()=>{})});for(let id=0;id<172;id++)gbaDrawProduct(id,0,0,8,10);ctx=old;globalThis.itemFrames=[...gbaFrames.keys()].filter(k=>k.startsWith('item:')).length;`);assert.equal(run('itemDraws'),172);assert.equal(run('itemFrames'),172);
 console.log('PASS: all 172 products use native pixel icons, including dough, coffee and meat');
